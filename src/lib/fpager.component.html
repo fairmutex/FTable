@@ -1,0 +1,16 @@
+﻿<div class="dataTables_length pull-left" id="dt-candidates_length">
+    <label>
+        Show
+        <select (change)="onChange($event)" [value]='pageOptions[selectedPageIndex]'>
+            <option *ngFor="let option of pageOptions"   [value]='option'>{{option}}</option>
+        </select> entries
+        <!--<button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-pencil"></span> New
+        </button>-->
+                        <button class='btn btn-primary'
+                                [routerLink]="['/claim/Create']">
+                                 New
+                            </button>
+
+    </label>
+</div>

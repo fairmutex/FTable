@@ -1,0 +1,54 @@
+﻿
+<p *ngIf="!page"><em>Loading...</em></p>
+<app-fexporter [data]="page"></app-fexporter>
+<app-fpager  [pageOptions]="table.pageSizes" [selectedPageIndex]='table.pageSizeIndex' (onPageOptionChange)="onPageOptionChange($event)"></app-fpager>
+ <!-- TODO-->
+<app-fsearch (search)='search($event)'></app-fsearch>
+<table class='table' *ngIf="page">
+    <thead>
+        <tr>
+            <th *ngFor='let column of table.columns;let index = index'><app-fsorter *ngIf='column.type' [icons]='sortIcons' (order)='sortOrder(index,$event)'></app-fsorter> {{column.title}} </th>
+        </tr>
+<tr>
+        <td *ngFor='let column of table.columns;let index = index'>
+            <div *ngIf='column.type'>
+                <!-- TODO-->
+                  <app-ffilter [propertyName]='column.name' [propertyType]='column.type' [otherData]='column.filterData' (filter)='filter(index,$event)'></app-ffilter>  <!-- [(ngModel)]='nameFilter' /> -->
+                </div>
+                <!-- TODO-->
+            <button *ngIf='!column.type' type="button" class="btn btn-default btn-sm">Reset filters</button>
+            </td>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr *ngFor="let entry of page">
+            <!-- <td>{{ entry.name }}</td>
+            <td>{{ entry.surname }}</td>
+            <td>{{ entry.age }}</td>
+            <td>{{ entry.email }}</td>
+            <td>{{ entry.status }}</td>
+            <td>{{ entry.dateOfBirth  | date:'medium' }}</td> -->
+            <ng-container *ngFor="let column of table.columns;let index = index">
+                <!-- <td *ngIf='column.type'> {{ column.prefix + entry[column.name] + column.postfix}}</td> -->
+                <td *ngIf='column.type' [innerHTML]='column.prefix + entry[column.name] + column.postfix'></td>
+            </ng-container>
+            <td>
+                <!--<ng-container *ngIf="userProfile?.hasClaim('Edit Weather Summaries')">-->
+                    <button type="button" class="btn btn-default btn-sm tableButton">
+                    <span class="fa fa-edit"></span> <!--Edit -->
+                    </button>
+                <!--</ng-container>-->
+                <!--<ng-container *ngIf="userProfile?.hasClaim('View Weather Summaries')">-->
+                    <button type="button" class="btn btn-default btn-sm tableButton">
+                    <span class="fa fa-info-circle"></span> <!--Details -->
+                    </button>
+                <!--</ng-container>-->
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-finfo [itemsPerPage]="table.pageSizes[table.pageSizeIndex]" [totalItems]="table.totalRows" [currentPage]="table.currentPage" [totalItemsAfterFilters]='table.filteredRows'></app-finfo>
+<app-fpaginate [itemsPerPage]="table.pageSizes[table.pageSizeIndex]" [totalItems]="table.totalRows"  [currentPage]="table.currentPage" [totalItemsAfterFilters]='table.filteredRows' (PagingChange)="onPagingChange($event)"></app-fpaginate>
+
