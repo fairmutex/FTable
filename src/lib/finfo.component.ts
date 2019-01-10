@@ -8,7 +8,7 @@ import { OnInit } from '@angular/core';
 
 
 @Component({
-    selector: 'app-finfo',
+    selector: 'ft-finfo',
     templateUrl: './finfo.component.html',
     styleUrls: ['./finfo.component.scss'],
 

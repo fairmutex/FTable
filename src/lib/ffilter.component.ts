@@ -7,7 +7,7 @@ import { EventEmitter } from '@angular/core';
 
 
 @Component({
-    selector: 'app-ffilter',
+    selector: 'ft-ffilter',
     templateUrl: './ffilter.component.html',
     styleUrls: ['./ffilter.component.scss'],
 

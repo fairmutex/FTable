@@ -6,6 +6,24 @@
     "@angular/core": "^7.0.0",
     "thenby": "^1.3.0",
     "font-awesome": "^4.7.0",
-    "bootstrap":"^4.2.1"
-  }
+    "bootstrap": "^4.2.1"
+  },
+  "description": "Angular Datatables (work in progress)",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fairmutex/FTable.git"
+  },
+  "keywords": [
+    "Tables"
+  ],
+  "author": "Stephan Galea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fairmutex/FTable/issues"
+  },
+  "homepage": "https://github.com/fairmutex/FTable#readme"
 }

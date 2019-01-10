@@ -10,7 +10,7 @@ import { EventEmitter } from '@angular/core';
 
 
 @Component({
-    selector: 'app-fsorter',
+    selector: 'ft-fsorter',
     templateUrl: './fsorter.component.html',
     styleUrls: ['./fsorter.component.scss'],
 

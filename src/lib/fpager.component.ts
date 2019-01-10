@@ -7,7 +7,7 @@ import { OnInit } from '@angular/core';
 
 
 @Component({
-    selector: 'app-fpager',
+    selector: 'ft-fpager',
     templateUrl: './fpager.component.html',
     styleUrls: ['./fpager.component.scss'],
 

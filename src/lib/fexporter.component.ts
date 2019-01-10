@@ -8,7 +8,7 @@ import { Inject } from '@angular/core';
 //import * as jsPDF from 'jspdf';
 
 @Component({
-    selector: 'app-fexporter',
+    selector: 'ft-fexporter',
     templateUrl: './fexporter.component.html',
     styleUrls: ['./fexporter.component.scss'],
      providers: [
@@ -21,7 +21,7 @@ export class FExporterComponent {
     // Number of Items per page
     @Input() private itemsPerPage: number;
     // Data
-    @Input() private data: any[];
+    @Input() public data: any[];
     //Current Page
     //@Input() private currentPage: number;
     //// Number of Pagination pages

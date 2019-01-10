@@ -19,7 +19,7 @@ import {  FTable, FColumn, FSearch, FOrder, FFilter  } from './ftable.model';
 // import { FSorterComponent } from './fsorter.component';
 
 @Component({
-    selector: 'app-ftable',
+    selector: 'ft-ftable',
     templateUrl: './ftable.component.html',
     styleUrls: ['./ftable.component.scss'],
 

@@ -73,7 +73,16 @@ import { FTableService } from './ftable.service';
         // DataCreateComponent,
         // DataFilterPipe
     ],
-    exports: [FTableComponent],
+    exports: [
+      FTableComponent,
+      FPaginateComponent,
+      FExporterComponent,
+      FInfoComponent,
+      FSearchComponent,
+      FPagerComponent,
+      FSorterComponent,
+      FFilterComponent
+    ],
     providers: [
       FTableService,
         // DataService,

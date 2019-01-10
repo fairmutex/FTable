@@ -14,7 +14,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
-    selector: 'app-fsearch',
+    selector: 'ft-fsearch',
     templateUrl: './fsearch.component.html',
     styleUrls: ['./fsearch.component.scss'],
 

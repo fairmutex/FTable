@@ -1,19 +1,19 @@
 ﻿
 <p *ngIf="!page"><em>Loading...</em></p>
-<app-fexporter [data]="page"></app-fexporter>
-<app-fpager  [pageOptions]="table.pageSizes" [selectedPageIndex]='table.pageSizeIndex' (onPageOptionChange)="onPageOptionChange($event)"></app-fpager>
+<ft-fexporter [data]="page"></ft-fexporter>
+<ft-fpager  [pageOptions]="table.pageSizes" [selectedPageIndex]='table.pageSizeIndex' (onPageOptionChange)="onPageOptionChange($event)"></ft-fpager>
  <!-- TODO-->
-<app-fsearch (search)='search($event)'></app-fsearch>
+<ft-fsearch (search)='search($event)'></ft-fsearch>
 <table class='table' *ngIf="page">
     <thead>
         <tr>
-            <th *ngFor='let column of table.columns;let index = index'><app-fsorter *ngIf='column.type' [icons]='sortIcons' (order)='sortOrder(index,$event)'></app-fsorter> {{column.title}} </th>
+            <th *ngFor='let column of table.columns;let index = index'><ft-fsorter *ngIf='column.type' [icons]='sortIcons' (order)='sortOrder(index,$event)'></ft-fsorter> {{column.title}} </th>
         </tr>
 <tr>
         <td *ngFor='let column of table.columns;let index = index'>
             <div *ngIf='column.type'>
                 <!-- TODO-->
-                  <app-ffilter [propertyName]='column.name' [propertyType]='column.type' [otherData]='column.filterData' (filter)='filter(index,$event)'></app-ffilter>  <!-- [(ngModel)]='nameFilter' /> -->
+                  <ft-ffilter [propertyName]='column.name' [propertyType]='column.type' [otherData]='column.filterData' (filter)='filter(index,$event)'></ft-ffilter>  <!-- [(ngModel)]='nameFilter' /> -->
                 </div>
                 <!-- TODO-->
             <button *ngIf='!column.type' type="button" class="btn btn-default btn-sm">Reset filters</button>
@@ -49,6 +49,6 @@
         </tr>
     </tbody>
 </table>
-<app-finfo [itemsPerPage]="table.pageSizes[table.pageSizeIndex]" [totalItems]="table.totalRows" [currentPage]="table.currentPage" [totalItemsAfterFilters]='table.filteredRows'></app-finfo>
-<app-fpaginate [itemsPerPage]="table.pageSizes[table.pageSizeIndex]" [totalItems]="table.totalRows"  [currentPage]="table.currentPage" [totalItemsAfterFilters]='table.filteredRows' (PagingChange)="onPagingChange($event)"></app-fpaginate>
+<ft-finfo [itemsPerPage]="table.pageSizes[table.pageSizeIndex]" [totalItems]="table.totalRows" [currentPage]="table.currentPage" [totalItemsAfterFilters]='table.filteredRows'></ft-finfo>
+<ft-fpaginate [itemsPerPage]="table.pageSizes[table.pageSizeIndex]" [totalItems]="table.totalRows"  [currentPage]="table.currentPage" [totalItemsAfterFilters]='table.filteredRows' (PagingChange)="onPagingChange($event)"></ft-fpaginate>
 

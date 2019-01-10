@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core';
 
 
 @Component({
-    selector: 'app-fpaginate',
+    selector: 'ft-fpaginate',
     templateUrl: './fpaginate.component.html',
     styleUrls: ['./fpaginate.component.scss'],
 
