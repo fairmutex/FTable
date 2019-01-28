@@ -13,10 +13,11 @@
         <td *ngFor='let column of table.columns;let index = index'>
             <div *ngIf='column.type'>
                 <!-- TODO-->
-                  <ft-ffilter [propertyName]='column.name' [propertyType]='column.type' [otherData]='column.filterData' (filter)='filter(index,$event)'></ft-ffilter>  <!-- [(ngModel)]='nameFilter' /> -->
+                  <!-- <ft-ffilter [propertyName]='column.name' [propertyType]='column.type' [otherData]='column.filterData' (filter)='filter(index,$event)'></ft-ffilter>  -->
+                   <!-- [(ngModel)]='nameFilter' /> -->
                 </div>
                 <!-- TODO-->
-            <button *ngIf='!column.type' type="button" class="btn btn-default btn-sm">Reset filters</button>
+            <button *ngIf='!column.type' type="button" class="btn btn-light btn-sm">Reset filters</button>
             </td>
 
         </tr>
@@ -36,12 +37,12 @@
             </ng-container>
             <td>
                 <!--<ng-container *ngIf="userProfile?.hasClaim('Edit Weather Summaries')">-->
-                    <button type="button" class="btn btn-default btn-sm tableButton">
+                    <button type="button" class="btn btn-light btn-sm tableButton">
                     <span class="fa fa-edit"></span> <!--Edit -->
                     </button>
                 <!--</ng-container>-->
                 <!--<ng-container *ngIf="userProfile?.hasClaim('View Weather Summaries')">-->
-                    <button type="button" class="btn btn-default btn-sm tableButton">
+                    <button type="button" class="btn btn-light btn-sm tableButton">
                     <span class="fa fa-info-circle"></span> <!--Details -->
                     </button>
                 <!--</ng-container>-->

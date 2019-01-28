@@ -58,7 +58,7 @@ export class FExporterComponent {
     CSV() {
         let filename: string = this.generateFileName()+".csv";
         let properties: string[] = [];
-        //console.log(this.data);
+        // console.log(this.data);
         let text: string = "";
         this.data.forEach(function (items) {
             for (var property in items) {

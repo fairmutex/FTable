@@ -1,82 +1,88 @@
 export class FTable {
-    pageSizes: number[];
-    pageSizeIndex: number;
-    currentPage: number;
-    totalRows: number;
-    data: any[];
-    columns: FColumn[];
-    search: FSearch;
-    orders: FOrder[];
-    filters: FFilter[];
-    filteredRows: number;
-    url: string;
+  pageSizes: number[];
+  pageSizeIndex: number;
+  currentPage: number;
+  totalRows: number;
+  data: any[];
+  columns: FColumn[];
+  search: FSearch;
+  orders: FOrder[];
+  filters: FFilter[];
+  filteredRows: number;
+  url: string;
 
-    constructor() {
-      this.filters = [];
-      this.currentPage = 0;
-    }
+  constructor() {
+    this.filters = [];
+    this.currentPage = 0;
   }
+}
 
-  export class FColumn {
-    title: string;
-    name: string;
-    type: string;
-    filterData: any[];
-    format: any;
+export class FColumn {
+  title: string;     // Column Title
+  name: string;      // Name to be used for references
+  type: string;      // datatype
+  filterData: any[];
+  format: (arg: any) => string; // display formatting function
 
-    prefix: string;
-    postfix: string;
+  // prefix: string;
+  // postfix: string;
 
-    isFilterable: Boolean;
-    isOrderable: Boolean;
-    isSearchable: Boolean;
+  isFilterable: Boolean;
+  isOrderable: Boolean;
+  isSearchable: Boolean;
 
-    constructor(
-      title: string,
-      name: string,
-      type: string,
-      prefix: string,
-      postfix: string
-    ) {
-      this.title = title;
-      this.name = name;
-      this.type = type;
-      this.filterData = [];
-      this.prefix = prefix;
-      this.postfix = postfix;
-    }
+  constructor(
+    title: string,
+    name: string,
+    type: string,
+    format: (arg: any) => string 
+    // ,
+    // prefix: string,
+    // postfix: string
+  ) {
+    this.title = title;
+    this.name = name;
+    this.type = type;
+    this.filterData = [];
+
+    this.format = (typeof  format  === "function" ? format : (x) => x);
+    // this.prefix = prefix;
+    // this.postfix = postfix;
   }
+}
 
-  export class FSearch {
-    value: any;
-    isRegex: boolean;
-    isInverse: boolean;
+export class FSearch {
+  value: any;
+  isRegex: boolean;   // Regular Expression/Not Regular Expression
+  isInverse: boolean; // Containing/Not containing
 
-    constructor(value: any) {
-      this.value = value;
-      this.isRegex = false;
-      this.isInverse = false;
-    }
+  constructor(value: any) {
+    this.value = value;
+    this.isRegex = false;
+    this.isInverse = false;
   }
+}
 
-  export class FFilter {
-    search: FSearch;
-    columnIndex: number;
+export class FFilter {
+  // search: FSearch;
+  columnName: string;
+  apply: (arg: any[]) => any[];
 
-    constructor(columnIndex: number, value: any) {
-      this.search = new FSearch(value);
-      this.columnIndex = columnIndex;
-    }
+  constructor(columnName: string, apply: (arg: any[]) => any[]) {
+    // this.search = new FSearch(value);
+    this.columnName = columnName;
+    this.apply = apply;
   }
+}
 
-  export class FOrder {
-    columnIndex: number;
-    direction: FDirection; // Asc/Desc
+export class FOrder {
+  columnIndex: number;
+  direction: FDirection; // Asc/Desc
 
-    constructor(columnIndex: number, direction: FDirection) {
-      this.columnIndex = columnIndex;
-      this.direction = direction;
-    }
+  constructor(columnIndex: number, direction: FDirection) {
+    this.columnIndex = columnIndex;
+    this.direction = direction;
   }
+}
 
-  type FDirection = 'Asc' | 'Desc';
+type FDirection = 'Asc' | 'Desc';
