@@ -4,12 +4,12 @@ import { Output } from '@angular/core';
 import { Input } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { FFilterBase } from './ffilter.base';
-
+// import { initDomAdapter } from '@angular/platform-browser/src/browser';
 
 @Component({
   template: `
   <div *ngFor="let value of otherData;let index = index">
-  <input  type="checkbox" name="propertyName" (click)='checkBoxClicked(index, value ,$event)' value="value" checked> {{ value }}<br>
+  <input  type="checkbox" [name]="columnName" (click)='checkBoxClicked(index, value ,$event)' value="value" [(ngModel)]='values[index].checked'> {{ value }}<br>
 </div>
   `
 })
@@ -19,31 +19,26 @@ export class CheckBoxFFilterComponent implements FFilterBase, OnInit {
 
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
 
-  private values: any[];
+  public values: any[];
 
   constructor() {
     this.values = [];
   }
 
   ngOnInit() {
-    // { value: x, checked: true }
-    this.values = this.otherData.map(x => {
-        const result = {};
-        result['value'] = x;
-        result['checked'] = true;
-        return result;
-      });
-      console.log(this.values);
+    this.initData();
    }
 
+  private initData(){
+    this.values = this.otherData.map(x => {
+      const result = {};
+      result['value'] = x;
+      result['checked'] = true;
+      return result;
+    });
+  }
+
   checkBoxClicked(index, value, event) {
-     console.log('Debug:' + index, value, event);
-
-    this.values = this.values.filter( x => x.value !== value);
-    this.values.push({ value: value, checked: event.target.checked});
-    console.log(this.values);
-
-
     const fn = function (name: string, values: any) {
       return d => {
         if (values.length > 0) {
@@ -57,6 +52,11 @@ export class CheckBoxFFilterComponent implements FFilterBase, OnInit {
       };
     };
     this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, this.values) });
+  }
+
+  reset() { 
+    this.initData();
+    this.filter.emit({ columnName: this.columnName, apply: null });
   }
 
 }

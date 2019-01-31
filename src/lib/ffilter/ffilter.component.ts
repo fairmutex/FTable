@@ -30,8 +30,9 @@ export class FFilterComponent implements OnInit, OnDestroy {
   @Input() public filterType: any; // Type of filter to load or custom.
   @Input() public otherData: any;  // Other data needed to be passed to filter
 
-  @Output() filter: EventEmitter<any> = new EventEmitter<any>(); // ?? not sure if needed
+  @Output() filter: EventEmitter<any> = new EventEmitter<any>();
   
+  filterr: FFilterBase;
 
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
@@ -76,6 +77,12 @@ export class FFilterComponent implements OnInit, OnDestroy {
     (<FFilterBase>componentRef.instance).filter.pipe(debounceTime(this.debounce)).subscribe((event) => {
       this.filter.emit(event);
     });
+    this.filterr = (<FFilterBase>componentRef.instance);
+  }
+
+
+  public reset() {
+    this.filterr.reset();
   }
 
 }

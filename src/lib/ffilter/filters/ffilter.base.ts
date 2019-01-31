@@ -8,4 +8,6 @@ export class FFilterBase {
   @Input() public columnName: string;
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
 
+
+  reset() { }
 }

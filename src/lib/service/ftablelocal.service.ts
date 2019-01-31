@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders} from '@angular/common/http';
 
 // import { Observable } from 'rxjs/Observable';
 // import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {  map } from 'rxjs/operators';
 import {firstBy} from 'thenby';
-import {  FTable, FColumn, FSearch, FOrder  } from './ftable.model';
-
+import {  FTable, FColumn, FSearch, FOrder  } from '../ftable.model';
+import { FTableBaseService } from './ftablebase.service';
 
 // @Injectable({
 //   providedIn: 'root'
@@ -14,14 +15,26 @@ import {  FTable, FColumn, FSearch, FOrder  } from './ftable.model';
 
 
 @Injectable()
-export class FTableService {
+export class FTableLocalService implements FTableBaseService {
 
     constructor(private http: HttpClient) {
     }
 
     public data = [];
+    private mode: string;
 
-    changeValue(idProperty:string,idValue:any,propertyToChange:string,fn: (n:any)=>any){
+    setLocalTableData(data: any[]){
+        this.mode = '';
+        this.data = data;
+    }
+
+
+ 
+
+    /*
+    *
+    */
+    setData(idProperty:string,idValue:any,propertyToChange:string,fn: (n:any)=>any){
        var row = this.data.find(d=>d[idProperty] === idValue);
        row[propertyToChange] = fn(row[propertyToChange]);
     }
@@ -63,7 +76,8 @@ export class FTableService {
 
  if (table.filters.length > 0) {
     for (let i = 0; i < table.filters.length; i++) {
-        data = table.filters[i].apply(data);
+        if(table.filters[i].apply)
+           data = table.filters[i].apply(data);
     }
  }
 

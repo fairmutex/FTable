@@ -30,7 +30,8 @@ import { FSearchComponent } from './fsearch.component';
 import { FSorterComponent } from './fsorter.component';
  import { FFilterComponent } from './ffilter/ffilter.component';
  import { FFilterDirective } from './ffilter/ffilter.directive';
-import { FTableService } from './ftable.service';
+import { FTableLocalService } from './service/ftablelocal.service';
+import { FTableAPIService } from './service/ftableAPI.service';
 // import ftable from './ftable.model';
 
 // import {FFilterService } from './ffilter/ffilter.service';
@@ -110,7 +111,9 @@ import { DateFFilterComponent } from './ffilter/filters/dateffilter.component';
 
    ],
     providers: [
-      FTableService,
+      // FTableBaseService,
+      FTableAPIService,
+      FTableLocalService
       // FFilterService
         // DataService,
         // DataDetailGuard,

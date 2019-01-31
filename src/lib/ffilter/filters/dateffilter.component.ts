@@ -14,7 +14,6 @@ import { FFilterBase } from './ffilter.base';
   <input  class="form-control input-sm" type="date" id="start" name="trip-start"  value=""  min="2018-01-01" max="2018-12-31">
   </div>
   `
-    // <input class="form-control input-sm" type='text' (keyup)='onKeyUp($event)'/>
 })
 export class DateFFilterComponent implements FFilterBase {
   @Input() public otherData: any;
@@ -31,6 +30,10 @@ export class DateFFilterComponent implements FFilterBase {
     this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, event.target.value) });
   }
 
+  reset() { 
+
+    this.filter.emit({ columnName: this.columnName, apply: null });
+  }
 }
 
 // Ideas:

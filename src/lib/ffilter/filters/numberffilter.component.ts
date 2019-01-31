@@ -10,19 +10,17 @@ import { FFilterBase } from './ffilter.base';
   template: `
   <div class="input-group input-group-sm mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">&gt;</span>
+      <span class="input-group-text" id="inputGroup-sizing-sm">&gt;=</span>
     </div>
-    <input class="form-control input-sm" type="number"  (keyup)='numberKeyUp("min",$event)'><br/>
+    <input class="form-control input-sm" type="number"  [(ngModel)]='min' (keyup)='numberKeyUp("min",$event)'><br/>
     </div>
     <div class="input-group input-group-sm">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">&lt;</span>
+      <span class="input-group-text" id="inputGroup-sizing-sm">&lt;=</span>
     </div>
-    <input class="form-control input-sm" type="number" (keyup)='numberKeyUp("max",$event)'>
+    <input class="form-control input-sm" type="number"  [(ngModel)]='max' (keyup)='numberKeyUp("max",$event)'>
   </div>
   `
-  // <input class="form-control input-sm" type="number"  (keyup)='numberKeyUp("min",$event)'> <br />
-  // <input class="form-control input-sm" type="number" (keyup)='numberKeyUp("max",$event)'>
 })
 export class NumberFFilterComponent implements FFilterBase {
   @Input() public otherData: any;
@@ -31,8 +29,8 @@ export class NumberFFilterComponent implements FFilterBase {
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
 
   // Hold Inputted Values
-  private min: number;
-  private max: number;
+  public min: number;
+  public max: number;
 
   numberKeyUp(mode, event) {
     this[mode] = event.target.value;
@@ -52,5 +50,9 @@ export class NumberFFilterComponent implements FFilterBase {
     this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, this.min, this.max) });
   }
 
+  reset() {
+    this.min = null;
+    this.max = null;
+    this.filter.emit({ columnName: this.columnName, apply:null });
+  }
 }
-

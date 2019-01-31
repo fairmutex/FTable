@@ -1,10 +1,16 @@
-import { FTableService } from './ftable.service';
+import { FTableBaseService } from './service/ftablebase.service';
 import {  FTable, FColumn, FSearch, FOrder, FFilter  } from './ftable.model';
 import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 
+import { ViewChildren } from '@angular/core';
+import { QueryList } from '@angular/core';
+import { FFilterComponent } from './ffilter/ffilter.component';
+
 export class FTableComponent implements OnChanges, OnInit {
+
+    @ViewChildren(FFilterComponent) filterChildren: QueryList<FFilterComponent>;
 
     public table: FTable;
     public page = [];
@@ -14,7 +20,7 @@ export class FTableComponent implements OnChanges, OnInit {
 //     // Column Titles
 //     private errorMessage: string;
 
-    constructor(public _ftableService: FTableService) {
+    constructor(public _ftableService: FTableBaseService) {
                   this.sortIcons = ['fa fa-sort', 'fa fa-sort-asc', 'fa fa-sort-desc'];
     }
 
@@ -81,7 +87,12 @@ export class FTableComponent implements OnChanges, OnInit {
 
 
     changeValue(idProperty:string,idValue:any,propertyToChange: string,fn: (n:any)=>any){
-        this._ftableService.changeValue(idProperty,idValue,propertyToChange,fn);
+        this._ftableService.setData(idProperty,idValue,propertyToChange,fn);
         this.refreshPage();
+    }
+
+    
+    public resetFilters() {
+        this.filterChildren.forEach(x => x.reset());
     }
 }

@@ -16,4 +16,6 @@ export class EmptyFFilterComponent implements FFilterBase {
 
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
 
+
+  reset() { }
 }
