@@ -23,6 +23,7 @@ import { FFilterBase } from './ffilter.base';
   `
 })
 export class NumberFFilterComponent implements FFilterBase {
+  @Input() public source: string;
   @Input() public otherData: any;
   @Input() public columnName: string;
 
@@ -34,25 +35,30 @@ export class NumberFFilterComponent implements FFilterBase {
 
   numberKeyUp(mode, event) {
     this[mode] = event.target.value;
-    const fn = function (name, searchMin, searchMax) {
-      return d => {
-        if (searchMin && searchMax) {
-          return (<any[]>d).filter(x => ((Number(x[name]) >= searchMin) && (Number(x[name]) <= searchMax)));
-        } else if (searchMin) {
-          return (<any[]>d).filter(x => (Number(x[name]) >= searchMin));
-        } else if (searchMax) {
-          return (<any[]>d).filter(x => (Number(x[name]) <= searchMax));
-        } else {
-          return (<any[]>d);
-        }
+    if (this.source === 'frontend') {
+      const fn = function (name, searchMin, searchMax) {
+        return d => {
+          if (searchMin && searchMax) {
+            return (<any[]>d).filter(x => ((Number(x[name]) >= searchMin) && (Number(x[name]) <= searchMax)));
+          } else if (searchMin) {
+            return (<any[]>d).filter(x => (Number(x[name]) >= searchMin));
+          } else if (searchMax) {
+            return (<any[]>d).filter(x => (Number(x[name]) <= searchMax));
+          } else {
+            return (<any[]>d);
+          }
+        };
       };
-    };
-    this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, this.min, this.max) });
+      this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, this.min, this.max) });
+    } else {
+      var result =  { min:this.min, max:this.max};
+      this.filter.emit({ columnName: this.columnName,type:'number', apply:  result });
+    }
   }
 
   reset() {
     this.min = null;
     this.max = null;
-    this.filter.emit({ columnName: this.columnName, apply:null });
+    this.filter.emit({ columnName: this.columnName, apply: null });
   }
 }

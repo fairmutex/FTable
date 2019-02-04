@@ -11,6 +11,7 @@ import { FFilterBase } from './ffilter.base';
   `
 })
 export class EmptyFFilterComponent implements FFilterBase {
+  @Input() public source: string;
   @Input() public otherData: any;
   @Input() public columnName: string;
 

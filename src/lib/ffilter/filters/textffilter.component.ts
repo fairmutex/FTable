@@ -13,6 +13,7 @@ import { FFilterBase } from './ffilter.base';
   `
 })
 export class TextFFilterComponent implements FFilterBase {
+  @Input() public source: string;
   @Input() public otherData: any;
   @Input() public columnName: string;
 
@@ -21,12 +22,17 @@ export class TextFFilterComponent implements FFilterBase {
   public value = '';
 
   onKeyUp(event) {
+    if (this.source === 'frontend') {
     const fn = function (name, searchValue) {
       return d => {
         return (<any[]>d).filter(x => String(x[name]).toLowerCase().indexOf(String(searchValue).toLowerCase()) !== -1);
       };
     };
     this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, event.target.value) });
+  }else{
+    var result =  {value:event.target.value};
+    this.filter.emit({ columnName: this.columnName,type:'string', apply: result });
+  }
   }
 
 

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders} from '@angular/common/http';
 
-// import { Observable } from 'rxjs/Observable';
 // import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {  map } from 'rxjs/operators';
 import {firstBy} from 'thenby';
-import {  FTable, FColumn, FSearch, FOrder  } from '../ftable.model';
+import {  FTable, FColumn, FSearch, FOrder, FTableResult, FTableDataModifier  } from '../ftable.model';
 import { FTableBaseService } from './ftablebase.service';
+import { Observable, empty } from 'rxjs';
+import { of } from 'rxjs'
 
 // @Injectable({
 //   providedIn: 'root'
@@ -29,23 +30,45 @@ export class FTableLocalService implements FTableBaseService {
     }
 
 
+    get(id:any): Observable<any>{
+         console.log('get');
+         return this.getRowByColumnNameAndValue('id',id);
+    }
  
+    getRowByColumnNameAndValue(name: string,value:any): Observable<any>{
+        console.log('getRowByColumnNameAndValue'+' '+name+' '+value);
+
+        const result = this.data.filter(x => x[name]== value);
+        console.log('getRowByColumnNameAndValue'+' '+name+' '+value);
+
+        if(result.length > 0){
+           return of(result[0]);
+        }
+        return empty();
+    }
 
     /*
     *
     */
-    setData(idProperty:string,idValue:any,propertyToChange:string,fn: (n:any)=>any){
-       var row = this.data.find(d=>d[idProperty] === idValue);
+    setData(id:any,propertyToChange:string,fn: (n:any)=>any):Observable<any>{
+       var row = this.data.find(d=>d['id'] === id);
        row[propertyToChange] = fn(row[propertyToChange]);
+       return of(row);
     }
 
+    delete(id:any):Observable<any>{
+        // cant modify JSON files frontend
+         var row = this.data.find(d=>d['id'] === id);
+        return of(row);
+    }
 
-    getData(table: FTable) {
-
-      // console.log(JSON.stringify(table));
+     getData(table: FTable): Observable<FTableResult>  {
 
       let data = this.data;
+     
 
+      // TODO
+      // Needs Further analysis what happens if the filter is not a standard how do we execute something like this?
       for (let i = 0; i < table.columns.length; i++) {
         if (table.columns[i].type === 'checkbox') {
            // table.columns[i].filterData = [...new Set(data.map(x => x[table.columns[i].name]))];
@@ -55,17 +78,17 @@ export class FTableLocalService implements FTableBaseService {
 
 
 
-      table.totalRows = data.length;
+      var totalRows = data.length;
       // Generic Search
       // TODO: Cater for Formatted Datatypes
-      if (table.search.value) {
-        table.currentPage = 1;
+      if (table.dataModifier.search.value) {
+        table.dataModifier.currentPage = 1;
       if (table.columns.length > 0) {
         let temp = [];
           for (let i = 0; i < table.columns.length; i++) {
               if (table.columns[i].name.length > 0) {
-                  temp = temp.concat(data.filter(x => String(x[table.columns[i].name]).indexOf(table.search.value) !== -1));
-                  data = data.filter(x => String(x[table.columns[i].name]).indexOf(table.search.value) === -1);
+                  temp = temp.concat(data.filter(x => String(x[table.columns[i].name]).indexOf(table.dataModifier.search.value) !== -1));
+                  data = data.filter(x => String(x[table.columns[i].name]).indexOf(table.dataModifier.search.value) === -1);
               }
           }
 
@@ -74,46 +97,43 @@ export class FTableLocalService implements FTableBaseService {
     }
 
 
- if (table.filters.length > 0) {
-    for (let i = 0; i < table.filters.length; i++) {
-        if(table.filters[i].apply)
-           data = table.filters[i].apply(data);
+ if (table.dataModifier.filters.length > 0) {
+    for (let i = 0; i < table.dataModifier.filters.length; i++) {
+        if(table.dataModifier.filters[i].apply)
+           data = table.dataModifier.filters[i].apply(data);
     }
  }
 
  
 
       // Column Priority Sorting
-      // TODO: Cater for Formatted Datatypes
-      if (table.orders.length > 0) {
+      if (table.dataModifier.orders.length > 0) {
           let sortBy;
-          for (let i = 0; i < table.orders.length; i++) {
-              const order = (table.orders[i].direction === 'Desc') ? -1 : 1;
+          for (let i = 0; i < table.dataModifier.orders.length; i++) {
+              const order = (table.dataModifier.orders[i].direction === 'Desc') ? -1 : 1;
               if (i === 0) {
-                  if (typeof data[0][table.columns[table.orders[i].columnIndex].name] === 'string') {
+                  if (typeof data[0][table.dataModifier.orders[i].columnName] === 'string') {
                     //  console.log('String firstBy:' + table.columns[table.orders[i].columnIndex].name);
-                      sortBy = firstBy(table.columns[table.orders[i].columnIndex].name, {
+                      sortBy = firstBy(table.dataModifier.orders[i].columnName, {
                           ignoreCase: true,
                           direction: order
                       });
-                  } else if (typeof data[0][table.columns[table.orders[i].columnIndex].name] === 'number') {
+                  } else if (typeof data[0][table.dataModifier.orders[i].columnName] === 'number') {
                       sortBy = firstBy(function(v1, v2) {
-                          return v1[table.columns[table.orders[i].columnIndex].name] - v2[table.columns[table.orders[i].columnIndex].name];
+                          return v1[table.dataModifier.orders[i].columnName] - v2[table.dataModifier.orders[i].columnName];
                       }, order);
                   } else {
-                      console.log('otherType sort:' + typeof data[0][table.columns[table.orders[i].columnIndex].name]);
+                    //   console.log('otherType sort:' + typeof data[0][table.columns[table.dataModifier.orders[i].columnIndex].name]);
                   }
               } else {
-                  console.log('thenBy:' + table.columns[table.orders[i].columnIndex].name);
-                  if (typeof data[0][table.columns[table.orders[i].columnIndex].name] === 'string') {
-
-                      sortBy = sortBy.thenBy(table.columns[table.orders[i].columnIndex].name, {
+                  if (typeof data[0][table.dataModifier.orders[i].columnName] === 'string') {
+                      sortBy = sortBy.thenBy(table.dataModifier.orders[i].columnName, {
                           ignoreCase: true,
                           direction: order
                       });
-                  } else if (typeof data[0][table.columns[table.orders[i].columnIndex].name] === 'number') {
+                  } else if (typeof data[0][table.dataModifier.orders[i].columnName] === 'number') {
                       sortBy = sortBy.thenBy(function(v1, v2) {
-                          return v1[table.columns[table.orders[i].columnIndex].name] - v2[table.columns[table.orders[i].columnIndex].name];
+                          return v1[table.dataModifier.orders[i].columnName] - v2[table.dataModifier.orders[i].columnName];
                       }, order);
                   } else {
                       console.log('otherType sort');
@@ -123,11 +143,13 @@ export class FTableLocalService implements FTableBaseService {
           data.sort(sortBy);
       }
 
-console.log('SIZE:' + table.currentPage + ' ' + table.pageSizes[table.pageSizeIndex]);
+console.log('SIZE:' + table.dataModifier.currentPage + ' ' + table.pageSizes[table.pageSizeIndex]);
 // this.page = this.data.slice(( this.currentPage - 1) * this.pageSize,  this.currentPage * this.pageSize);
 
-      table.filteredRows = data.length;
-      return data.slice((table.currentPage-1) * table.pageSizes[table.pageSizeIndex], (table.currentPage * (table.pageSizes[table.pageSizeIndex])));
+      var totalRowsAfterModifications = data.length;
+      var page = data.slice((table.dataModifier.currentPage-1) * table.pageSizes[table.pageSizeIndex], (table.dataModifier.currentPage * (table.pageSizes[table.pageSizeIndex])));
+      var result = new FTableResult(page,totalRows,totalRowsAfterModifications,null);
+      return of(result);
   }
 
 

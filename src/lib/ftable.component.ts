@@ -26,7 +26,6 @@ export class FTableComponent implements OnChanges, OnInit {
 
     ngOnInit() {
         this.refreshPage();
-        // this.page = this._ftableService.getData(this.table);
     }
 
     ngOnChanges(changes) {
@@ -34,61 +33,75 @@ export class FTableComponent implements OnChanges, OnInit {
         // Get @Input data when it's ready
         if (changes.url) {
             this.refreshPage();
-            // this.page = this._ftableService.getData(this.table);
         }
     }
 
     onPageOptionChange(pageSizeIndex: number) {
         this.table.pageSizeIndex = pageSizeIndex;
         this.refreshPage();
-        // this.page = this._ftableService.getData(this.table);
     }
 
     onPagingChange(pageNumber: number) {
-        this.table.currentPage = pageNumber;
+        this.table.dataModifier.currentPage = pageNumber;
         this.refreshPage();
-        // this.page = this._ftableService.getData(this.table);
     }
 
-    sortOrder(index, event) {
-        this.table.orders =  this.table.orders.filter(x => x.columnIndex !== index);
+    // sortOrder(index, event) {
+    //     this.table.dataModifier.orders =  this.table.dataModifier.orders.filter(x => x.columnIndex !== index);
+    //     if (event.state !== '') {
+    //         this.table.dataModifier.orders.push(new FOrder(index, event.state));
+    //     }
+    //     this.refreshPage();
+    // }
+
+    sortOrder(columnName:string, event) {
+        this.table.dataModifier.orders =  this.table.dataModifier.orders.filter(x => x.columnName !== columnName);
         if (event.state !== '') {
-            this.table.orders.push(new FOrder(index, event.state));
+            this.table.dataModifier.orders.push(new FOrder(columnName, event.state));
         }
+        console.log("Orders");
+        console.log(this.table.dataModifier.orders);
         this.refreshPage();
-        // this.page = this._ftableService.getData(this.table);
     }
 
     filter(event) {
-        // console.log("ftable.base:filter(event)");
-        // console.log(event);
-        this.table.filters = this.table.filters.filter(x => x.columnName !== event.columnName);
+        this.table.dataModifier.filters = this.table.dataModifier.filters.filter(x => x.columnName !== event.columnName);
         // Push Filter
-        this.table.filters.push(new FFilter(event.columnName,event.apply))
+        console.log(event);
+        this.table.dataModifier.filters.push(new FFilter(event.columnName,event.type,event.apply));
         // Filter the data
         this.refreshPage();
-        // this.page = this._ftableService.getData(this.table);
     }
 
     search(event) {
-        this.table.search = new FSearch(event.searchString);
+        this.table.dataModifier.search = new FSearch(event.searchString);
         this.refreshPage();
-        // this.page = this._ftableService.getData(this.table);
     }
 
 
-    getGlobalIndex(index: number){
 
-    }
 
     refreshPage(){
-        this.page = this._ftableService.getData(this.table);
+         this._ftableService.getData(this.table)
+        .subscribe(
+            (result) => {
+                 this.table.result = result;
+            }, error => {
+              console.log("Error", error);
+            });
+          
     }
 
 
-    changeValue(idProperty:string,idValue:any,propertyToChange: string,fn: (n:any)=>any){
-        this._ftableService.setData(idProperty,idValue,propertyToChange,fn);
-        this.refreshPage();
+    changeValue(idValue:any,propertyToChange: string,fn: any){
+        this._ftableService.setData(idValue,propertyToChange,fn)
+        .subscribe(
+            (result) => {
+                this.refreshPage();
+            }, error => {
+              console.log("Error", error);
+            });
+       
     }
 
     

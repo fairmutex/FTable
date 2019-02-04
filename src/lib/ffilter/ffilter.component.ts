@@ -22,6 +22,7 @@ import { debounceTime } from 'rxjs/operators';
 export class FFilterComponent implements OnInit, OnDestroy {
 
   @ViewChild(FFilterDirective) ffilterHost: FFilterDirective; // Handle to template where to load custom filter
+  @Input() public source: string;
 
   // @Input() public columnIndex: number;
   @Input() public columnName: string;
@@ -71,6 +72,7 @@ export class FFilterComponent implements OnInit, OnDestroy {
     const componentRef = viewContainerRef.createComponent(componentFactory);
     // Pass data to filters
     (<FFilterBase>componentRef.instance).columnName = this.columnName;
+    (<FFilterBase>componentRef.instance).source = this.source;
     (<FFilterBase>componentRef.instance).otherData = this.otherData;
 
     // Bubble filter event

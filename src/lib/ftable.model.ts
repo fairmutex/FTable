@@ -1,15 +1,29 @@
 export class FTable {
-  pageSizes: number[];
-  pageSizeIndex: number;
-  currentPage: number;
-  totalRows: number;
-  data: any[];
-  columns: FColumn[];
-  search: FSearch;
-  orders: FOrder[];
-  filters: FFilter[];
-  filteredRows: number;
-  url: string;
+  
+  pageSizes: number[]; // Page sizes available
+  pageSizeIndex: number; // current page size index
+  // currentPage: number;
+  // data: any[]; // Data ?
+  columns: FColumn[];  // column definitions
+  // filteredRows: number;
+
+  dataModifier: FTableDataModifier; // Data Modifier Object
+  result: FTableResult;  // Result Data from datamodifier object
+
+
+  constructor() {
+    this.dataModifier = new FTableDataModifier()
+
+  }
+}
+
+// Properties that modify the current page
+export class FTableDataModifier {
+  pageSize:number; // Page size
+  currentPage: number;  // Current Page
+  search: FSearch;  // global Search
+  orders: FOrder[];  // sortings
+  filters: FFilter[];  // filters
 
   constructor() {
     this.filters = [];
@@ -17,19 +31,33 @@ export class FTable {
   }
 }
 
+export class FTableResult {
+  totalRows: number;          // Total rows of data
+  totalRowsAfterModifications: number; // Total rows after After Searching/filtering
+  page: any[]; // Current Page od Data for display
+  // TODO
+  filterData:any[]; // not sure how to deal with this yet
+
+  constructor(page:any[],totalRows:number,totalRowsAfterModifications:number, filterData:any[]){
+    this.page = page;
+    this.totalRows = totalRows;
+    this.totalRowsAfterModifications = totalRowsAfterModifications;
+    this,filterData = filterData;
+  }
+
+}
+
 export class FColumn {
   title: string;     // Column Title
   name: string;      // Name to be used for references
   type: string;      // datatype
-  filterData: any[];
+  filterData: any[]; // Extra data used for filtering 
   format: (arg: any) => string; // display formatting function
 
-  // prefix: string;
-  // postfix: string;
 
-  isFilterable: Boolean;
-  isOrderable: Boolean;
-  isSearchable: Boolean;
+  // isFilterable: Boolean;
+  // isOrderable: Boolean;
+  // isSearchable: Boolean;
 
   constructor(
     title: string,
@@ -53,34 +81,37 @@ export class FColumn {
 
 export class FSearch {
   value: any;
-  isRegex: boolean;   // Regular Expression/Not Regular Expression
-  isInverse: boolean; // Containing/Not containing
+  // isRegex: boolean;   // Regular Expression/Not Regular Expression
+  // isInverse: boolean; // Containing/Not containing
 
   constructor(value: any) {
     this.value = value;
-    this.isRegex = false;
-    this.isInverse = false;
+    // this.isRegex = false;
+    // this.isInverse = false;
   }
 }
 
 export class FFilter {
-  // search: FSearch;
+  type:string;
   columnName: string;
-  apply: (arg: any[]) => any[];
+  apply: any;//(arg: any[]) => any[];
 
-  constructor(columnName: string, apply: (arg: any[]) => any[]) {
+  constructor(columnName: string, type:string, apply:any){// (arg: any[]) => any[]) {
     // this.search = new FSearch(value);
+    this.type = type;
     this.columnName = columnName;
     this.apply = apply;
   }
 }
 
 export class FOrder {
-  columnIndex: number;
+  // columnIndex: number;
+  columnName: string;
   direction: FDirection; // Asc/Desc
 
-  constructor(columnIndex: number, direction: FDirection) {
-    this.columnIndex = columnIndex;
+  constructor(columnName:string, direction: FDirection) {
+    // this.columnIndex = columnIndex;
+    this.columnName = columnName;
     this.direction = direction;
   }
 }
