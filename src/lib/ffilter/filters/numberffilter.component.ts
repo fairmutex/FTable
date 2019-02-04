@@ -30,23 +30,18 @@ export class NumberFFilterComponent implements FFilterBase {
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
 
   // Hold Inputted Values
-  public min: number;
-  public max: number;
+  public min: number = null;
+  public max: number = null;
 
-  numberKeyUp(mode, event) {
+  numberKeyUp(mode:string, event) {
     this[mode] = event.target.value;
     if (this.source === 'frontend') {
       const fn = function (name, searchMin, searchMax) {
         return d => {
-          if (searchMin && searchMax) {
-            return (<any[]>d).filter(x => ((Number(x[name]) >= searchMin) && (Number(x[name]) <= searchMax)));
-          } else if (searchMin) {
-            return (<any[]>d).filter(x => (Number(x[name]) >= searchMin));
-          } else if (searchMax) {
-            return (<any[]>d).filter(x => (Number(x[name]) <= searchMax));
-          } else {
-            return (<any[]>d);
-          }
+          return (<any[]>d).filter(x =>
+                 (searchMin? searchMin <= Number(x[name]): true) &&
+                 (searchMax? searchMax >= Number(x[name]) : true) 
+          );
         };
       };
       this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, this.min, this.max) });

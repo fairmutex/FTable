@@ -1,6 +1,6 @@
 {
   "name": "ftable",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0",
@@ -8,7 +8,7 @@
     "font-awesome": "^4.7.0",
     "bootstrap": "^4.2.1"
   },
-  "description": "Angular Datatables (work in progress)",
+  "description": "Angular 6/7 Tables",
   "main": "karma.conf.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,9 +18,10 @@
     "url": "git+https://github.com/fairmutex/FTable.git"
   },
   "keywords": [
-    "Tables"
+    "Tables", "Angular", "Angular7", "Datatables", "table", "grid","filter", "sort", "pagination", "paging"
   ],
   "author": "Stephan Galea",
+  "url": "https://www.linkedin.com/in/stephan-galea-803a308b/",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/fairmutex/FTable/issues"
