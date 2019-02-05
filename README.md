@@ -44,5 +44,6 @@ some filters in backend Sample are not implemented yet
 0.0.8  Restructured a lot to have Backend support and WebAPI Sample  
        Sorting is now using column name instead of index due to WebAPI back end  
 0.0.9  Date Filtering Implemented, Optimized Number filtering Code
+0.0.10 Fixed Issue with Remote Date filtering
 
 

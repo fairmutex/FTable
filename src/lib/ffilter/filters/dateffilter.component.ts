@@ -87,7 +87,7 @@ export class DateFFilterComponent implements FFilterBase {
    
     this.filter.emit({ columnName: this.columnName,type:'date', apply: fn(this.columnName, this.minDay,this.minMonth,this.minYear, this.maxDay,this.maxMonth,this.maxYear) });
   }else{
-    var result =  { minDay:this.minDay, minMonth:this.minMonth, minYear:this.minYear, maxDay:this.minDay, maxMonth:this.minMonth, maxYear:this.maxYear};
+    var result =  { minDay:this.minDay, minMonth:this.minMonth, minYear:this.minYear, maxDay:this.maxDay, maxMonth:this.maxMonth, maxYear:this.maxYear};
     this.filter.emit({ columnName: this.columnName,type:'date', apply: result });
   }
   }
