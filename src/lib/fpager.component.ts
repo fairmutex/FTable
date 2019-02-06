@@ -13,7 +13,6 @@ import { OnInit } from '@angular/core';
 
 })
 
-
 export class FPagerComponent implements OnInit {
     @Input() public selectedPageIndex: number;
     @Input() public pageOptions: Array<number>;
@@ -25,22 +24,12 @@ export class FPagerComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(JSON.stringify(+this.pageOptions));
+        // console.log(JSON.stringify(+this.pageOptions));
     }
-
-
-
 
     onChange(event: any) {
          this.selectedPageIndex = this.pageOptions.indexOf(Number(event.target.value));
         this.onPageOptionChange.emit(this.pageOptions.indexOf(Number(event.target.value)));
     }
-
-
-
-
-
-
-
 
 }

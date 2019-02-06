@@ -23,11 +23,13 @@ Dependencies
 
 
 Warning: This is not production ready, published only to get feedback and ideas  
-Some features need further optimisations.
 
 TODO:  
+Dev Friendly API
+Documentation on how to use.
+Further optimisations
 Provide backend to frontend preconfiguration   
-Provide some other sample backend systems node or php  
+Provide some other sample backend systems node/php  
 * Remove dependencies on Bootstrap/FontAwesome by introducing default preprocessor stylings and responsiveness  
 
 Proof of Concept Application and Backend system
@@ -44,6 +46,5 @@ https://github.com/fairmutex/FTable-WebAPI-sample
        Sorting is now using column name instead of index due to WebAPI back end  
 0.0.9  Date Filtering Implemented, Optimized Number filtering Code  
 0.0.10 Fixed Issue with Remote Date filtering  
-0.0.11 Enhanced UX on Number and Date Filters (right Arrow moves cursor )
-
-
+0.0.11 Enhanced UX on Number and Date Filters (right Arrow moves cursor )  
+0.0.12 Optimized Reset filter to call API once and Code cleanup  

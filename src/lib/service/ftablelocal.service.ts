@@ -10,9 +10,6 @@ import { FTableBaseService } from './ftablebase.service';
 import { Observable, empty } from 'rxjs';
 import { of } from 'rxjs'
 
-// @Injectable({
-//   providedIn: 'root'
-// })
 
 
 @Injectable()
@@ -31,15 +28,15 @@ export class FTableLocalService implements FTableBaseService {
 
 
     get(id:any): Observable<any>{
-         console.log('get');
+        //  console.log('get');
          return this.getRowByColumnNameAndValue('id',id);
     }
  
     getRowByColumnNameAndValue(name: string,value:any): Observable<any>{
-        console.log('getRowByColumnNameAndValue'+' '+name+' '+value);
+        // console.log('getRowByColumnNameAndValue'+' '+name+' '+value);
 
         const result = this.data.filter(x => x[name]== value);
-        console.log('getRowByColumnNameAndValue'+' '+name+' '+value);
+        // console.log('getRowByColumnNameAndValue'+' '+name+' '+value);
 
         if(result.length > 0){
            return of(result[0]);
@@ -67,11 +64,8 @@ export class FTableLocalService implements FTableBaseService {
       let data = this.data;
      
 
-      // TODO
-      // Needs Further analysis what happens if the filter is not a standard how do we execute something like this?
       for (let i = 0; i < table.columns.length; i++) {
         if (table.columns[i].type === 'checkbox') {
-           // table.columns[i].filterData = [...new Set(data.map(x => x[table.columns[i].name]))];
             table.columns[i].filterData = Array.from(new Set(data.map(x => x[table.columns[i].name])))
         }
       }
@@ -80,7 +74,6 @@ export class FTableLocalService implements FTableBaseService {
 
       var totalRows = data.length;
       // Generic Search
-      // TODO: Cater for Formatted Datatypes
       if (table.dataModifier.search.value) {
         table.dataModifier.currentPage = 1;
       if (table.columns.length > 0) {
@@ -143,7 +136,7 @@ export class FTableLocalService implements FTableBaseService {
           data.sort(sortBy);
       }
 
-console.log('SIZE:' + table.dataModifier.currentPage + ' ' + table.pageSizes[table.pageSizeIndex]);
+// console.log('SIZE:' + table.dataModifier.currentPage + ' ' + table.pageSizes[table.pageSizeIndex]);
 // this.page = this.data.slice(( this.currentPage - 1) * this.pageSize,  this.currentPage * this.pageSize);
 
       var totalRowsAfterModifications = data.length;

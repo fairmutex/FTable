@@ -24,7 +24,6 @@ export class FFilterComponent implements OnInit, OnDestroy {
   @ViewChild(FFilterDirective) ffilterHost: FFilterDirective; // Handle to template where to load custom filter
   @Input() public source: string;
 
-  // @Input() public columnIndex: number;
   @Input() public columnName: string;
   @Input() public debounce: number = 500;
 
@@ -34,8 +33,7 @@ export class FFilterComponent implements OnInit, OnDestroy {
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
   
   filterr: FFilterBase;
-
-
+  static totalfilters = 0;
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
@@ -47,6 +45,7 @@ export class FFilterComponent implements OnInit, OnDestroy {
   }
 
   loadComponent() {
+    // filter counter
     // Check if standard filters else load custom
     let  fftilter;
     if (this.filterType === 'string') {
@@ -75,16 +74,22 @@ export class FFilterComponent implements OnInit, OnDestroy {
     (<FFilterBase>componentRef.instance).source = this.source;
     (<FFilterBase>componentRef.instance).otherData = this.otherData;
 
+    
+    // var resetCount = 0;
     // Bubble filter event
     (<FFilterBase>componentRef.instance).filter.pipe(debounceTime(this.debounce)).subscribe((event) => {
-      this.filter.emit(event);
+          this.filter.emit(event);
     });
     this.filterr = (<FFilterBase>componentRef.instance);
   }
 
-
   public reset() {
     this.filterr.reset();
   }
+
+
+
+
+
 
 }

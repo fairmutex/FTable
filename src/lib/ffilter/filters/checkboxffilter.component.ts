@@ -55,7 +55,6 @@ export class CheckBoxFFilterComponent implements FFilterBase, OnInit {
       };
       this.filter.emit({ columnName: this.columnName, apply: fn(this.columnName, this.values) });
     } else {
-
       this.values[index].checked = !this.values[index].checked
       var filtered = this.values.filter(x=>x.checked === true).map(a => a.value);
       var result = {values:filtered};

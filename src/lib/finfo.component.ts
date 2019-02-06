@@ -2,10 +2,6 @@
 import { Input } from '@angular/core';
 import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
-// import { CTableComponent } from '../ctable/ctable.component';
-// import { CTableService } from "../ctable/ctable.service";
-
-
 
 @Component({
     selector: 'ft-finfo',
@@ -13,7 +9,6 @@ import { OnInit } from '@angular/core';
     styleUrls: ['./finfo.component.scss'],
 
 })
-
 
 export class FInfoComponent implements OnInit {
     @Input() public totalItemsAfterFilters: number;
@@ -27,8 +22,6 @@ export class FInfoComponent implements OnInit {
     private totalPages: number;
     // Orientation of Pagination
 
-    // Redundant
-   // private itemsCount: number;
     Math: any;
 
     constructor() {
@@ -36,18 +29,9 @@ export class FInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        // When the data is passed instantly, you can access it here.
-        // You can also use {{childInput}} in your HTML
-        console.log('TotalItems:' + this.totalItems);
+        // console.log('TotalItems:' + this.totalItems);
         this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-        console.log('TotalPages:' + this.totalPages);
+        // console.log('TotalPages:' + this.totalPages);
     }
-
-
-
-
-
-
-
 
 }

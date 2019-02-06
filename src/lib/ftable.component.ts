@@ -59,18 +59,26 @@ export class FTableComponent implements OnChanges, OnInit {
         if (event.state !== '') {
             this.table.dataModifier.orders.push(new FOrder(columnName, event.state));
         }
-        console.log("Orders");
-        console.log(this.table.dataModifier.orders);
         this.refreshPage();
     }
 
+    private filterResetCount:number = 0;
     filter(event) {
+        // TODO Count Resets
         this.table.dataModifier.filters = this.table.dataModifier.filters.filter(x => x.columnName !== event.columnName);
         // Push Filter
         console.log(event);
         this.table.dataModifier.filters.push(new FFilter(event.columnName,event.type,event.apply));
-        // Filter the data
-        this.refreshPage();
+
+        // If reset count all filter resets and emit one reset event
+        if (event.apply == null){
+            if(++this.filterResetCount == this.table.dataModifier.filters.length){
+              this.filterResetCount = 0;
+              this.refreshPage();
+          }
+        }else{
+           this.refreshPage();
+        }
     }
 
     search(event) {
