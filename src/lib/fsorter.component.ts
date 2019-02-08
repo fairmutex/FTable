@@ -15,11 +15,9 @@ export class FSorterComponent {
     @Input() public icons: string[];
     @Output() order: EventEmitter<any> = new EventEmitter<any>();
 
-
     public states: string[];
     public nextState: number;
     public currentIcon: number;
-
 
     constructor() {
         this.nextState = 0;

@@ -1,13 +1,11 @@
 ﻿import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { OnChanges } from '@angular/core';
 import { OnInit } from '@angular/core';
 
 @Component({
     selector: 'ft-finfo',
     templateUrl: './finfo.component.html',
     styleUrls: ['./finfo.component.scss'],
-
 })
 
 export class FInfoComponent implements OnInit {

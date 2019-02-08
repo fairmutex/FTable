@@ -7,8 +7,10 @@ import { FFilterBase } from './ffilter.base';
 
 @Component({
   template: `
-  <div class="input-group input-group-sm mb-3">
-  <input class="form-control input-sm" type='text' [(ngModel)]='value' (keyup)='onKeyUp($event)'/>
+  <div class="ft-ffilter">
+    <div class="ft-div1-ffilter">
+      <input class="ft-i ft-i-filter" type='text' [(ngModel)]='value' (keyup)='onKeyUp($event)'/>
+    </div>
   </div>
   `
 })

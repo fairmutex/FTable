@@ -8,18 +8,19 @@ import { FFilterBase } from './ffilter.base';
 
 @Component({
   template: `
-  <div class="datefilter input-group input-group-sm mb-3" style='width:180px;'>
-  <input class="form-control input-sm" type='text'  placeholder='dd'    [(ngModel)]='minDay'   (keydown)='onKeyUp("minDay",   2, $event)'  style='width:45px;' #minDayRef />
-  <input class="form-control input-sm" type='text'  placeholder='mm'    [(ngModel)]='minMonth' (keydown)='onKeyUp("minMonth", 2, $event)'  style='width:45px;' #minMonthRef />
-  <input class="form-control input-sm" type='text'  placeholder='yyyy'  [(ngModel)]='minYear'  (keydown)='onKeyUp("minYear",  4, $event)'  style='width:90px;' #minYearRef />
+  <div class='ft-ffilter'>
+    <div class="ft-filter-date ft-div1-ffilter">
+    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='minDay'   (keydown)='onKeyUp("minDay",   2, $event)'  #minDayRef />
+    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='minMonth' (keydown)='onKeyUp("minMonth", 2, $event)' #minMonthRef />
+    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='minYear'  (keydown)='onKeyUp("minYear",  4, $event)'   #minYearRef />
+    </div>
+    <div class="ft-filter-date ft-div2-ffilter">
+    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='maxDay'   (keydown)='onKeyUp("maxDay" ,  2, $event)'  #maxDayRef />
+    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='maxMonth' (keydown)='onKeyUp("maxMonth", 2, $event)'  #maxMonthRef />
+    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='maxYear'  (keydown)='onKeyUp("maxYear",  4, $event)'  #maxYearRef />
+    </div>
   </div>
-  <div class="input-group input-group-sm" style='width:180px;'>
-  <input class="form-control input-sm" type='text'  placeholder='dd'    [(ngModel)]='maxDay'   (keydown)='onKeyUp("maxDay" ,  2, $event)'  style='width:45px;' #maxDayRef />
-  <input class="form-control input-sm" type='text'  placeholder='mm'    [(ngModel)]='maxMonth' (keydown)='onKeyUp("maxMonth", 2, $event)'  style='width:45px;' #maxMonthRef />
-  <input class="form-control input-sm" type='text'  placeholder='yyyy'  [(ngModel)]='maxYear'  (keydown)='onKeyUp("maxYear",  4, $event)'  style='width:90px;' #maxYearRef />
-  </div>
-  `,
-  styles: ['.datefilter { display:flex; flex-grow:1 }']
+  `
 })
 
 export class DateFFilterComponent implements FFilterBase {

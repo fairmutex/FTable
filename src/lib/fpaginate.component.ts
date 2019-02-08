@@ -12,10 +12,14 @@ import { OnInit } from '@angular/core';
 
 })
 
-
 export class FPaginateComponent implements OnInit, OnChanges {
 
-    @Output() PagingChange: EventEmitter<number> = new EventEmitter<number>();
+    // Number of Items per page
+    @Input() private itemsPerPage: number;
+    // Data
+    @Input() private totalItems: number;
+    // Current Page
+    @Input() public currentPage: number;
 
     @Input()
     set totalItemsAfterFilters(totalItemsAfterFilters: number) {
@@ -24,47 +28,24 @@ export class FPaginateComponent implements OnInit, OnChanges {
         this.currentPage = 1;
     }
 
-    // Number of Items per page
-    @Input() private itemsPerPage: number;
-    // Data
-    @Input() private totalItems: number;
-    // Current Page
-    @Input() public currentPage: number;
-    // Number of Pagination pages
 
+    @Output() PagingChange: EventEmitter<number> = new EventEmitter<number>();
 
     private _totalItemsAfterFilters: number;
     public totalPages: number;
 
-    // Redundant
-    public itemsCount: number;
-
-
-    constructor() {
-
-    }
-
     ngOnInit() {
-        // When the data is passed instantly, you can access it here.
-        // You can also use {{childInput}} in your HTML
-
         this.totalPages = Math.ceil(this._totalItemsAfterFilters / this.itemsPerPage);
         this.setCurrentPage(this.currentPage);
-
     }
 
     ngOnChanges() {
-        // When the data is passed instantly, you can access it here.
-        // You can also use {{childInput}} in your HTML
-
         this.totalPages = Math.ceil(this._totalItemsAfterFilters / this.itemsPerPage);
     }
 
     setCurrentPage(number: number) {
-        // console.log(number);
         this.currentPage = number;
         this.PagingChange.emit(number);
-
     }
 
     firstPage() {

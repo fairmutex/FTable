@@ -1,6 +1,9 @@
-﻿<div id="dt-candidates_filter" class="dataTables_filter pull-right">
-    <!-- <label> -->
-        <!-- <i class="fa fa-search"></i> -->
-        <input type="search" class="form-control input-sm" placeholder="" aria-controls="dt-candidates" (keyup)='onKeyUp($event)'>
-    <!-- </label> -->
+﻿<div class="ft-fsearch">
+        <div class="ft-fsearch-prepend">
+                <span><i aria-hidden="true"></i></span>
+        </div>
+        <input type="search" class="ft-i" (keyup)='onKeyUp($event)'>
+        <div class="ft-fsearch-append">
+                <span><i aria-hidden="true"></i></span>
+        </div>
 </div>

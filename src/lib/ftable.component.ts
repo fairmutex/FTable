@@ -38,6 +38,7 @@ export class FTableComponent implements OnChanges, OnInit {
 
     onPageOptionChange(pageSizeIndex: number) {
         this.table.pageSizeIndex = pageSizeIndex;
+        this.table.dataModifier.pageSize = this.table.pageSizes[pageSizeIndex];
         this.refreshPage();
     }
 
@@ -64,12 +65,8 @@ export class FTableComponent implements OnChanges, OnInit {
 
     private filterResetCount:number = 0;
     filter(event) {
-        // TODO Count Resets
         this.table.dataModifier.filters = this.table.dataModifier.filters.filter(x => x.columnName !== event.columnName);
-        // Push Filter
-        console.log(event);
         this.table.dataModifier.filters.push(new FFilter(event.columnName,event.type,event.apply));
-
         // If reset count all filter resets and emit one reset event
         if (event.apply == null){
             if(++this.filterResetCount == this.table.dataModifier.filters.length){

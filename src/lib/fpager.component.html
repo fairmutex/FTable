@@ -1,16 +1,12 @@
-﻿<div class="dataTables_length pull-left" id="dt-candidates_length">
-    <label>
-        Show
-        <select (change)="onChange($event)" [value]='pageOptions[selectedPageIndex]'>
+﻿
+<div class="ft-pager">
+    <div class="ft-fpager-prepend">
+      <label class="ft-pager-text" for="inputGroupSelect01">Show</label>
+    </div>
+        <select (change)="onChange($event)" [value]='pageOptions[selectedPageIndex]' class="ft-fpager-select" id="inputGroupSelect01">
             <option *ngFor="let option of pageOptions"   [value]='option'>{{option}}</option>
-        </select> entries
-        <!--<button type="button" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-pencil"></span> New
-        </button>-->
-                        <!-- <button class='btn btn-primary'
-                                [routerLink]="['/claim/Create']">
-                                 New
-                            </button> -->
-
-    </label>
-</div>
+        </select>
+    <div class="ft-fpager-append">
+        <label class="ft-pager-text">entries</label>
+      </div>
+  </div>

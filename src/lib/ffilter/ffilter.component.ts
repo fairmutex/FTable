@@ -5,13 +5,12 @@ import { NumberFFilterComponent } from './filters/numberffilter.component';
 import { CheckBoxFFilterComponent } from './filters/checkboxffilter.component';
 import { DateFFilterComponent } from './filters/dateffilter.component';
 import { FFilterDirective } from './ffilter.directive';
-// import { FFilter } from './model/ffilter.model';
 import { FFilterBase } from './filters/ffilter.base';
 
 import { EventEmitter } from '@angular/core';
 import { Output } from '@angular/core';
 import { debounceTime } from 'rxjs/operators';
-//                 // <h3>Filter</h3>
+
 @Component({
   selector: 'ft-ffilter',
   template: `
@@ -74,8 +73,6 @@ export class FFilterComponent implements OnInit, OnDestroy {
     (<FFilterBase>componentRef.instance).source = this.source;
     (<FFilterBase>componentRef.instance).otherData = this.otherData;
 
-    
-    // var resetCount = 0;
     // Bubble filter event
     (<FFilterBase>componentRef.instance).filter.pipe(debounceTime(this.debounce)).subscribe((event) => {
           this.filter.emit(event);
@@ -86,10 +83,5 @@ export class FFilterComponent implements OnInit, OnDestroy {
   public reset() {
     this.filterr.reset();
   }
-
-
-
-
-
 
 }

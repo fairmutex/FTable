@@ -9,17 +9,26 @@ import { FFilterBase } from './ffilter.base';
 
 @Component({
   template: `
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">&gt;=</span>
+  <div class="ft-ffilter">
+    <div class="ft-div1-ffilter">
+      <div class="ft-ffilter-prepend">
+          <span class="ft-filter-text">&gt;=</span>
+      </div>
+      <input class="ft-i" type="number"  [(ngModel)]='min' (keyup)='numberKeyUp("min",$event)' #minRef >
+      <div class="ft-ffilter-append">
+          <span class="ft-filter-text">&lt;=</span>
+      </div>
     </div>
-    <input class="form-control input-sm" type="number"  [(ngModel)]='min' (keyup)='numberKeyUp("min",$event)' #minRef ><br/>
+
+    <div class="ft-div2-ffilter">
+      <div class="ft-ffilter-prepend">
+        <span class="ft-filter-text">&lt;=</span>
+      </div>
+      <input class="ft-i" type="number"  [(ngModel)]='max' (keyup)='numberKeyUp("max",$event)' #maxRef >
+      <div class="ft-ffilter-append">
+        <span class="ft-filter-text">&gt;=</span>
+      </div>
     </div>
-    <div class="input-group input-group-sm">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">&lt;=</span>
-    </div>
-    <input class="form-control input-sm" type="number"  [(ngModel)]='max' (keyup)='numberKeyUp("max",$event)' #maxRef >
   </div>
   `
 })
