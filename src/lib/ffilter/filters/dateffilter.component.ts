@@ -10,14 +10,14 @@ import { FFilterBase } from './ffilter.base';
   template: `
   <div class='ft-ffilter'>
     <div class="ft-filter-date ft-div1-ffilter">
-    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='minDay'   (keydown)='onKeyUp("minDay",   2, $event)'  #minDayRef />
-    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='minMonth' (keydown)='onKeyUp("minMonth", 2, $event)' #minMonthRef />
-    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='minYear'  (keydown)='onKeyUp("minYear",  4, $event)'   #minYearRef />
+    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='minDay'   (keyup)='onKeyUp("minDay",   2, $event)'  #minDayRef />
+    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='minMonth' (keyup)='onKeyUp("minMonth", 2, $event)' #minMonthRef />
+    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='minYear'  (keyup)='onKeyUp("minYear",  4, $event)'   #minYearRef />
     </div>
     <div class="ft-filter-date ft-div2-ffilter">
-    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='maxDay'   (keydown)='onKeyUp("maxDay" ,  2, $event)'  #maxDayRef />
-    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='maxMonth' (keydown)='onKeyUp("maxMonth", 2, $event)'  #maxMonthRef />
-    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='maxYear'  (keydown)='onKeyUp("maxYear",  4, $event)'  #maxYearRef />
+    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='maxDay'   (keyup)='onKeyUp("maxDay" ,  2, $event)'  #maxDayRef />
+    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='maxMonth' (keyup)='onKeyUp("maxMonth", 2, $event)'  #maxMonthRef />
+    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='maxYear'  (keyup)='onKeyUp("maxYear",  4, $event)'  #maxYearRef />
     </div>
   </div>
   `
@@ -78,6 +78,7 @@ export class DateFFilterComponent implements FFilterBase {
       const fn = function (name, minDay, minMonth, minYear, maxDay, maxMonth, maxYear) {
         return d => {
           return (<any[]>d).filter(x => {
+            console.log(name, minDay, minMonth, minYear, maxDay, maxMonth, maxYear);
             const date = new Date(x[name]);
             return (minDay.length > 0 ? Number(minDay) <= date.getDate() : true) &&
               (minMonth.length > 0 ? Number(minMonth) <= date.getMonth() + 1 : true) &&

@@ -24,8 +24,8 @@ A set of components that work together to create tabular content.
  
 
 ### TODO:  
-Friendly API
-Documentation on how to use (in progress)
+Friendly API  
+Documentation on how to use (in progress)  
 Further optimisations (in progress)
 Provide backend to frontend preconfiguration   
 Provide some other sample backend systems node/php  
@@ -50,7 +50,8 @@ https://github.com/fairmutex/FTable-WebAPI-sample
 0.0.11 Enhanced UX on Number and Date Filters (right Arrow moves cursor )  
 0.0.12 Optimized Reset filter to call API once and Code cleanup 
 0.0.13 Removed Bootstrap and FontAwesome from FTable dependency, setting styling at App level  
-       FExporter takes a 'formats' input to customize export types available
+       FExporter takes a 'formats' input to customize export types available  
+0.0.14 Dixed date filtering  
 ```
 
 
