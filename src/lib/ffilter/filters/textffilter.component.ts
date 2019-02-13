@@ -7,12 +7,24 @@ import { FFilterBase } from './ffilter.base';
 
 @Component({
   template: `
+  <table class='ft-ffilter-table'>
+  <tr class='ft-ffilter-column'>
+      <td class='ft-ffilter-row'>
+      <input class="ft-i ft-i-ffilter ft-i-ffilter-text" type='text' [(ngModel)]='value' (keyup)='onKeyUp($event)'/>
+      </td>
+  </tr>
+</table>
+  <!--
   <div class="ft-ffilter">
     <div class="ft-div1-ffilter">
-      <input class="ft-i ft-i-filter" type='text' [(ngModel)]='value' (keyup)='onKeyUp($event)'/>
+      <input class="ft-i ft-i-ffilter ft-i-ffilter-text" type='text' [(ngModel)]='value' (keyup)='onKeyUp($event)'/>
     </div>
   </div>
-  `
+  -->
+  `,
+  styles: [`
+  :host { flex:1;
+  }`]
 })
 export class TextFFilterComponent implements FFilterBase {
   @Input() public source: string;

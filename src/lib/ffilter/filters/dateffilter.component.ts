@@ -8,19 +8,50 @@ import { FFilterBase } from './ffilter.base';
 
 @Component({
   template: `
+
+  <table class='ft-ffilter-table ft-ffilter-date-table'>
+  <tr class='ft-ffilter-column'>
+      <td class='ft-ffilter-row  ft-ffilter-dd-row'>
+          <input class="ft-i ft-i-ffilter ft-i-ffilter-day" type='text'  placeholder='dd'    [(ngModel)]='minDay'   (keyup)='onKeyUp("minDay",   2, $event)'  #minDayRef />
+      </td>
+      <td class='ft-ffilter-row  ft-ffilter-mm-row'>
+          <input class="ft-i ft-i-ffilter ft-i-ffilter-month" type='text'  placeholder='mm'    [(ngModel)]='minMonth' (keyup)='onKeyUp("minMonth", 2, $event)' #minMonthRef />
+      </td>
+      <td class='ft-ffilter-row  ft-ffilter-yyyy-row'>
+          <input class="ft-i ft-i-ffilter ft-i-ffilter-year" type='text'  placeholder='yyyy'  [(ngModel)]='minYear'  (keyup)='onKeyUp("minYear",  4, $event)'   #minYearRef />
+      </td>
+  </tr>
+  <tr class='ft-ffilter-column'>
+      <td class='ft-ffilter-row  ft-ffilter-dd-row'>
+          <input class="ft-i ft-i-ffilter ft-i-ffilter-day" type='text'  placeholder='dd'    [(ngModel)]='maxDay'   (keyup)='onKeyUp("maxDay" ,  2, $event)'  #maxDayRef />
+      </td>
+      <td class='ft-ffilter-row  ft-ffilter-mm-row'>
+          <input class="ft-i ft-i-ffilter ft-i-ffilter-month" type='text'  placeholder='mm'    [(ngModel)]='maxMonth' (keyup)='onKeyUp("maxMonth", 2, $event)'  #maxMonthRef />
+      </td>
+      <td class='ft-ffilter-row  ft-ffilter-yyyy-row'>
+          <input class="ft-i ft-i-ffilter ft-i-ffilter-year" type='text'  placeholder='yyyy'  [(ngModel)]='maxYear'  (keyup)='onKeyUp("maxYear",  4, $event)'  #maxYearRef />
+      </td>
+  </tr>
+</table>
+  <!--
   <div class='ft-ffilter'>
     <div class="ft-filter-date ft-div1-ffilter">
-    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='minDay'   (keyup)='onKeyUp("minDay",   2, $event)'  #minDayRef />
-    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='minMonth' (keyup)='onKeyUp("minMonth", 2, $event)' #minMonthRef />
-    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='minYear'  (keyup)='onKeyUp("minYear",  4, $event)'   #minYearRef />
+    <input class="ft-i ft-i-filter ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='minDay'   (keyup)='onKeyUp("minDay",   2, $event)'  #minDayRef />
+    <input class="ft-i ft-i-filter ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='minMonth' (keyup)='onKeyUp("minMonth", 2, $event)' #minMonthRef />
+    <input class="ft-i ft-i-filter ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='minYear'  (keyup)='onKeyUp("minYear",  4, $event)'   #minYearRef />
     </div>
     <div class="ft-filter-date ft-div2-ffilter">
-    <input class="ft-i ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='maxDay'   (keyup)='onKeyUp("maxDay" ,  2, $event)'  #maxDayRef />
-    <input class="ft-i ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='maxMonth' (keyup)='onKeyUp("maxMonth", 2, $event)'  #maxMonthRef />
-    <input class="ft-i ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='maxYear'  (keyup)='onKeyUp("maxYear",  4, $event)'  #maxYearRef />
+    <input class="ft-i ft-i-filter ft-i-filter-day" type='text'  placeholder='dd'    [(ngModel)]='maxDay'   (keyup)='onKeyUp("maxDay" ,  2, $event)'  #maxDayRef />
+    <input class="ft-i ft-i-filter ft-i-filter-month" type='text'  placeholder='mm'    [(ngModel)]='maxMonth' (keyup)='onKeyUp("maxMonth", 2, $event)'  #maxMonthRef />
+    <input class="ft-i ft-i-filter ft-i-filter-year" type='text'  placeholder='yyyy'  [(ngModel)]='maxYear'  (keyup)='onKeyUp("maxYear",  4, $event)'  #maxYearRef />
     </div>
   </div>
-  `
+
+  -->
+  `,
+  styles: [`
+  :host { flex:1;
+  }`]
 })
 
 export class DateFFilterComponent implements FFilterBase {

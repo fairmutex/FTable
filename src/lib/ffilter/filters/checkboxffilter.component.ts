@@ -8,9 +8,19 @@ import { FFilterBase } from './ffilter.base';
 
 @Component({
   template: `
-  <div class='ft-filter ft-c-filter' *ngFor="let value of otherData;let index = index">
-      <input  class='ft-c' type="checkbox" [name]="columnName" (click)='checkBoxClicked(index, value ,$event)' value="value" [(ngModel)]='values[index].checked'> {{ value }}<br>
-  </div>
+
+  <table class='ft-ffilter-table'>
+      
+  <tr class='ft-ffilter-column'  *ngFor="let value of otherData;let index = index">
+      <td class='ft-ffilter-row'>
+          <span><input class="ft-c" type="checkbox"[name]="columnName" (click)='checkBoxClicked(index, value ,$event)' value="value" [(ngModel)]='values[index].checked'> {{ value }}</span>
+      </td>
+  </tr>
+</table>
+  <!--
+   <div class='ft-ffilter ft-c-filter' *ngFor="let value of otherData;let index = index">
+       <input  class='ft-c' type="checkbox" [name]="columnName" (click)='checkBoxClicked(index, value ,$event)' value="value" [(ngModel)]='values[index].checked'> {{ value }}<br>
+   </div> -->
   `
 })
 export class CheckBoxFFilterComponent implements FFilterBase, OnInit {

@@ -9,14 +9,28 @@ import { FFilterBase } from './ffilter.base';
 
 @Component({
   template: `
+  <table class='ft-ffilter-table'>
+  <tr class='ft-ffilter-column'>
+      <td class='ft-ffilter-row'>
+          <input class="ft-i ft-i-ffilter ft-i-min" type="number"  placeholder='>=' [(ngModel)]='min' (keyup)='numberKeyUp("min",$event)' #minRef >
+      </td>
+  </tr>
+  <tr class='ft-ffilter-column'>
+      <td class='ft-ffilter-row'>
+          <input class="ft-i ft-i-ffilter ft-i-max" type="number"  placeholder='<=' [(ngModel)]='max' (keyup)='numberKeyUp("max",$event)' #maxRef >
+      </td>
+  </tr>
+</table>
+
+  <!--
   <div class="ft-ffilter">
     <div class="ft-div1-ffilter">
       <div class="ft-ffilter-prepend">
-          <span class="ft-filter-text">&gt;=</span>
+          <span class="ft-ffilter-text">&gt;=</span>
       </div>
-      <input class="ft-i" type="number"  [(ngModel)]='min' (keyup)='numberKeyUp("min",$event)' #minRef >
+      <input class="ft-i ft-i-ffilter ft-i-min" type="number"  [(ngModel)]='min' (keyup)='numberKeyUp("min",$event)' #minRef >
       <div class="ft-ffilter-append">
-          <span class="ft-filter-text">&lt;=</span>
+          <span class="ft-ffilter-text">&lt;=</span>
       </div>
     </div>
 
@@ -24,13 +38,17 @@ import { FFilterBase } from './ffilter.base';
       <div class="ft-ffilter-prepend">
         <span class="ft-filter-text">&lt;=</span>
       </div>
-      <input class="ft-i" type="number"  [(ngModel)]='max' (keyup)='numberKeyUp("max",$event)' #maxRef >
+      <input class="ft-i ft-i-filter ft-i-max" type="number"  [(ngModel)]='max' (keyup)='numberKeyUp("max",$event)' #maxRef >
       <div class="ft-ffilter-append">
         <span class="ft-filter-text">&gt;=</span>
       </div>
     </div>
   </div>
-  `
+  -->
+  `,
+  styles: [`
+  :host { flex:1;
+  }`]
 })
 export class NumberFFilterComponent implements FFilterBase {
   @ViewChild("minRef") _elMinRef: ElementRef;

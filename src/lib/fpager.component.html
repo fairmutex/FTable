@@ -1,9 +1,9 @@
 ﻿
-<div class="ft-pager">
+<div class="ft-fpager">
     <div class="ft-fpager-prepend">
       <label class="ft-pager-text" for="inputGroupSelect01">Show</label>
     </div>
-        <select (change)="onChange($event)" [value]='pageOptions[selectedPageIndex]' class="ft-fpager-select" id="inputGroupSelect01">
+        <select (change)="onChange($event)" [value]='pageOptions[selectedPageIndex]' class="ft-i ft-fpager-select" id="inputGroupSelect01">
             <option *ngFor="let option of pageOptions"   [value]='option'>{{option}}</option>
         </select>
     <div class="ft-fpager-append">

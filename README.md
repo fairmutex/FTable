@@ -51,7 +51,8 @@ https://github.com/fairmutex/FTable-WebAPI-sample
 0.0.12 Optimized Reset filter to call API once and Code cleanup 
 0.0.13 Removed Bootstrap and FontAwesome from FTable dependency, setting styling at App level  
        FExporter takes a 'formats' input to customize export types available  
-0.0.14 Dixed date filtering  
+0.0.14 Fixed date filtering  
+0.0.15 Changes in filtering tags, several class renames and minor adjustments
 ```
 
 

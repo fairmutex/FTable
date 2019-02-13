@@ -1,69 +1,69 @@
-﻿<div id="ft-paginate" class="ft-paginate">
+﻿<div id="ft-fpaginate" class="ft-fpaginate">
     
-    <button class="ft-b ft-b-paginate" id='ft-b-paginate_first'    [disabled]="isFirstDisabled()"    (click)="firstPage()"><i></i></button>
-    <button class="ft-b ft-b-paginate" id='ft-b-paginate_previous' [disabled]="isPreviousDisabled()" (click)="previousPage()"><i></i></button>
+    <button class="ft-b ft-b-fpaginate" id='ft-b-fpaginate_first'    [disabled]="isFirstDisabled()"    (click)="firstPage()"><i></i></button>
+    <button class="ft-b ft-b-fpaginate" id='ft-b-fpaginate_previous' [disabled]="isPreviousDisabled()" (click)="previousPage()"><i></i></button>
 
     <!-- <span> -->
         <ng-container *ngIf="totalPages < 8">
             <ng-container *ngIf="totalPages > 0">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 1, 'ft-b-paginate_current': currentPage == 1}" (click)="setCurrentPage(1)">1</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 1, 'ft-b-fpaginate_current': currentPage == 1}" (click)="setCurrentPage(1)">1</button>
             </ng-container>
             <ng-container *ngIf="totalPages > 1">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 2, 'ft-b-paginate_current': currentPage == 2}" (click)="setCurrentPage(2)">2</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 2, 'ft-b-fpaginate_current': currentPage == 2}" (click)="setCurrentPage(2)">2</button>
             </ng-container>
             <ng-container *ngIf="totalPages > 2">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 3, 'ft-b-paginate_current': currentPage == 3}" (click)="setCurrentPage(3)">3</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 3, 'ft-b-fpaginate_current': currentPage == 3}" (click)="setCurrentPage(3)">3</button>
             </ng-container>
             <ng-container *ngIf="totalPages > 3">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 4, 'ft-b-paginate_current': currentPage == 4}" (click)="setCurrentPage(4)">4</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 4, 'ft-b-fpaginate_current': currentPage == 4}" (click)="setCurrentPage(4)">4</button>
             </ng-container>
             <ng-container *ngIf="totalPages > 4">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 5, 'ft-b-paginate_current': currentPage == 5}" (click)="setCurrentPage(5)">5</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 5, 'ft-b-fpaginate_current': currentPage == 5}" (click)="setCurrentPage(5)">5</button>
             </ng-container>
             <ng-container *ngIf="totalPages > 5">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 6, 'ft-b-paginate_current': currentPage == 6}" (click)="setCurrentPage(6)">6</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 6, 'ft-b-fpaginate_current': currentPage == 6}" (click)="setCurrentPage(6)">6</button>
             </ng-container>
             <ng-container *ngIf="totalPages > 6">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 7, 'ft-b-paginate_current': currentPage == 7}" (click)="setCurrentPage(7)">7</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 7, 'ft-b-fpaginate_current': currentPage == 7}" (click)="setCurrentPage(7)">7</button>
             </ng-container>
         </ng-container>
 
         <ng-container *ngIf="totalPages > 7">
 
             <ng-container *ngIf="currentPage < 5">
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 1, 'ft-b-paginate_current': currentPage == 1}" (click)="setCurrentPage(1)">1</button>
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 2, 'ft-b-paginate_current': currentPage == 2}" (click)="setCurrentPage(2)">2</button>
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 3, 'ft-b-paginate_current': currentPage == 3}" (click)="setCurrentPage(3)">3</button>
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != 4, 'ft-b-paginate_current': currentPage == 4}" (click)="setCurrentPage(4)">4</button>
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(5)">5</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 1, 'ft-b-fpaginate_current': currentPage == 1}" (click)="setCurrentPage(1)">1</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 2, 'ft-b-fpaginate_current': currentPage == 2}" (click)="setCurrentPage(2)">2</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 3, 'ft-b-fpaginate_current': currentPage == 3}" (click)="setCurrentPage(3)">3</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != 4, 'ft-b-fpaginate_current': currentPage == 4}" (click)="setCurrentPage(4)">4</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(5)">5</button>
                 <span class='ft-paginate_ellipsis'>&#8230;</span>
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(totalPages)">{{totalPages}}</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(totalPages)">{{totalPages}}</button>
             </ng-container>
 
             <ng-container *ngIf="currentPage >= totalPages-3">
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(1)">1</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(1)">1</button>
                 <span class='ft-paginate_ellipsis'>&#8230;</span>
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(totalPages-4)">{{totalPages-4}}</button>
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != (totalPages-3), 'ft-b-paginate_current': currentPage == (totalPages-3)}" (click)="setCurrentPage(totalPages-3)">{{totalPages-3}}</button>
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != (totalPages-2), 'ft-b-paginate_current': currentPage == (totalPages-2)}" (click)="setCurrentPage(totalPages-2)">{{totalPages-2}}</button>
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != (totalPages-1), 'ft-b-paginate_current': currentPage == (totalPages-1)}" (click)="setCurrentPage(totalPages-1)">{{totalPages-1}}</button>
-                <button [ngClass]="{'ft-b ft-b-paginate': currentPage != (totalPages), 'ft-b-paginate_current': currentPage == (totalPages)}" (click)="setCurrentPage(totalPages)">{{totalPages}}</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(totalPages-4)">{{totalPages-4}}</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != (totalPages-3), 'ft-b-fpaginate_current': currentPage == (totalPages-3)}" (click)="setCurrentPage(totalPages-3)">{{totalPages-3}}</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != (totalPages-2), 'ft-b-fpaginate_current': currentPage == (totalPages-2)}" (click)="setCurrentPage(totalPages-2)">{{totalPages-2}}</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != (totalPages-1), 'ft-b-fpaginate_current': currentPage == (totalPages-1)}" (click)="setCurrentPage(totalPages-1)">{{totalPages-1}}</button>
+                <button class='ft-b' [ngClass]="{'ft-b-fpaginate': currentPage != (totalPages), 'ft-b-fpaginate_current': currentPage == (totalPages)}" (click)="setCurrentPage(totalPages)">{{totalPages}}</button>
             </ng-container>
 
             <ng-container *ngIf="(currentPage < (totalPages-3)) && (currentPage >= 5)">
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(1)">1</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(1)">1</button>
                 <span class='ft-paginate_ellipsis'>&#8230;</span>
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(currentPage-1)">{{currentPage-1}}</button>
-                <button class="ft-b-paginate_current" (click)="setCurrentPage(currentPage)">{{currentPage}}</button>
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(currentPage+1)">{{currentPage+1}}</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(currentPage-1)">{{currentPage-1}}</button>
+                <button class="ft-b ft-b-fpaginate_current" (click)="setCurrentPage(currentPage)">{{currentPage}}</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(currentPage+1)">{{currentPage+1}}</button>
                 <span class='ft-paginate_ellipsis'>&#8230;</span>
-                <button class="ft-b ft-b-paginate" (click)="setCurrentPage(totalPages)">{{totalPages}}</button>
+                <button class="ft-b ft-b-fpaginate" (click)="setCurrentPage(totalPages)">{{totalPages}}</button>
             </ng-container>
 
         </ng-container>
     <!-- </span> -->
 
-    <button class="ft-b ft-b-paginate" id='ft-b-paginate_next'  [disabled]="isNextDisabled()" (click)="nextPage()"><i></i></button>
-    <button class="ft-b ft-b-paginate" id='ft-b-paginate_last'  [disabled]="isLastDisabled()" (click)="lastPage()"><i></i></button>
+    <button class="ft-b ft-b-fpaginate" id='ft-b-fpaginate_next'  [disabled]="isNextDisabled()" (click)="nextPage()"><i></i></button>
+    <button class="ft-b ft-b-fpaginate" id='ft-b-fpaginate_last'  [disabled]="isLastDisabled()" (click)="lastPage()"><i></i></button>
 
 </div>
