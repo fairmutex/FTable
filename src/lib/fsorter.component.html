@@ -1,1 +1,1 @@
-﻿<button class="ft-b ft-b-fsorter" (click)="next()" title="{{states[nextState]}}"><span class="{{icons[currentIcon]}}"></span></button>
+﻿<button class="ft-b ft-b-fsorter" (click)="next()" title="{{states[nextState]}}"><span [ngClass]="{'ft-sort-neutral': currentIcon == 0, 'ft-sort-asc': currentIcon == 1, 'ft-sort-desc': currentIcon == 2}"></span></button>

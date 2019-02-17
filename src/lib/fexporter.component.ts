@@ -40,16 +40,18 @@ export class FExporterComponent {
         });
         text = properties.map(function (x) { return x.substr(0, 1).toUpperCase() + x.substr(1)}).join() + '\r\n' + text;
 
-        var a = document.createElement('a');
-        var b64CSVFile = btoa(decodeURIComponent(encodeURIComponent(text)));
-        a.href = "data:application/octet-stream;base64," + b64CSVFile;
-        a.setAttribute('download', filename);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        // console.log(b64CSVFile);
-        // console.log('Export to CSV');
+        var blob = new Blob([text], { type: 'text/csv' });
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, filename);
+        }
+        else {
+            var elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = filename;
+            document.body.appendChild(elem);
+            elem.click();
+            document.body.removeChild(elem);
+        }
 }
 
     COPY(){
@@ -79,9 +81,7 @@ export class FExporterComponent {
         
         input1.select();
         document.execCommand("copy", false, null);
-       // var msg = successful ? 'successful' : 'unsuccessful';
-       // console.log('Copy email command was ' + msg);
-        // console.log('Copy Data');
+
     } catch(err) {
         console.log('Oops, unable to copy');
         }
@@ -89,9 +89,6 @@ export class FExporterComponent {
     }
 
     PRINT() {
-        //this.items.
-        //var doc = document.createElement("table");
-        //doc.execCommand("Copy");
         let properties: string[] = [];
         var doc = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);
         var body = document.createElementNS('http://www.w3.org/1999/xhtml', 'body');
@@ -114,34 +111,35 @@ export class FExporterComponent {
                     } else {
                         cell.textContent = items[property];
                     }
-                    //cell.textContent = item;
                     row.appendChild(cell);
-                    //});
                 }
             }
             tbody.appendChild(row);
         });
-        // console.log(doc);
 
         var pw = window.open("about:blank", "_new");
         pw.document.open();
         pw.document.write(new XMLSerializer().serializeToString(doc));
         pw.print();
         pw.close();
-       // pw.document.close();
-
-       // console.log('Export to PRINT');
     }
 
     JSON() {
+
         let filename: string = this.generateFileName() + ".json";
-        var a = document.createElement('a');
-        a.href = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.data));
-        a.setAttribute('download', filename);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        console.log('Export to JSON');
+        var blob = new Blob([JSON.stringify(this.data)], { type: 'text/json' });
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, filename);
+        }
+        else {
+            var elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = filename;
+            document.body.appendChild(elem);
+            elem.click();
+            document.body.removeChild(elem);
+        }
+        
     }
 
     // XLSX
@@ -151,11 +149,8 @@ export class FExporterComponent {
     var c;
     var n;
     var k;
-    // for (n = 0; n < 256; n++) {
     for (n = 0; n < 256; n++) {
         c = n;
-        //console.log("BIN:"+("00000000"+c.toString(2)).slice(-8))
-        //console.log(n);
         for (k = 0; k < 8; k++) {
 
             if ((c & 1) > 0) {
@@ -164,7 +159,6 @@ export class FExporterComponent {
             } else {
                 c = (c >>> 1) >>> 0;
             }
-            // console.log("BIN1:"+("00000000000000000000000000000000"+c.toString(2)).slice(-32))
         }
         crc_table[n] = c;
     }
@@ -179,8 +173,6 @@ crc32(buf) {
     var n;
 
     for (n = 0; n < buf.length; n++) {
-        // console.log(buf[n]);
-        //console.log("BIN1:"+("00000000000000000000000000000000"+buf[n].charCodeAt(0).toString(2)).slice(-32));
         c = (crc_table[((c ^ (buf[n].charCodeAt(0))) & 0xFF)] ^ (c >>> 8));
     }
     return (c ^ 0xFFFFFFFF) >>> 0;
@@ -190,7 +182,6 @@ crc32(buf) {
   numberToExcelLetters(n) {
     var quotient = Math.floor(n / 26);
     var remainder = n % 26;
-    //console.log("quotient:"+quotient+"remainder:"+remainder);
     var result = '';
     if (quotient > 0)
         result += this.numberToExcelLetters(quotient);
@@ -659,16 +650,30 @@ crc32(buf) {
         //#################################
         // Link File Generator
         //#################################
+   
+       const raw = LocalFileHeaders + CentralDirectoryFileHeaders + EndofCentralDirectoryRecord;
+        const rawLength = raw.length;
+        const uInt8Array = new Uint8Array(rawLength);
+        
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+        
 
-        var a = document.createElement('a');
-        var b64ZipFile = btoa(decodeURIComponent(encodeURIComponent(LocalFileHeaders + CentralDirectoryFileHeaders + EndofCentralDirectoryRecord)));
-        a.href = "data:application/octet-stream;base64," + b64ZipFile;
-        a.setAttribute('download', filename);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        // console.log(b64ZipFile);
-        // console.log('Export to XLSX');
+        var blob = new Blob([uInt8Array], { type: 'application/octet-stream'});;
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, filename);
+        }
+        else {
+            var elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = filename;
+            document.body.appendChild(elem);
+            elem.click();
+            document.body.removeChild(elem);
+        }
+        
+
     }
 
 
@@ -704,15 +709,28 @@ crc32(buf) {
       
 
         fileContent += '\x65\x6e\x64\x73\x74\x72\x65\x61\x6d\x0d\x0a\x65\x6e\x64\x6f\x62\x6a\x0d\x0a\x78\x72\x65\x66\x0d\x0a\x30\x20\x37\x0d\x0a\x30\x30\x30\x30\x30\x30\x30\x30\x30\x30\x20\x36\x35\x35\x33\x35\x20\x66\x0d\x0a\x30\x30\x30\x30\x30\x30\x30\x30\x30\x39\x20\x30\x30\x30\x30\x30\x20\x6e\x0d\x0a\x30\x30\x30\x30\x30\x30\x30\x30\x35\x36\x20\x30\x30\x30\x30\x30\x20\x6e\x0d\x0a\x30\x30\x30\x30\x30\x30\x30\x31\x31\x31\x20\x30\x30\x30\x30\x30\x20\x6e\x0d\x0a\x30\x30\x30\x30\x30\x30\x30\x32\x31\x32\x20\x30\x30\x30\x30\x30\x20\x6e\x0d\x0a\x30\x30\x30\x30\x30\x30\x30\x32\x35\x30\x20\x30\x30\x30\x30\x30\x20\x6e\x0d\x0a\x30\x30\x30\x30\x30\x30\x30\x33\x31\x37\x20\x30\x30\x30\x30\x30\x20\x6e\x0d\x0a\x74\x72\x61\x69\x6c\x65\x72\x20\x3c\x3c\x2f\x53\x69\x7a\x65\x20\x37\x2f\x52\x6f\x6f\x74\x20\x31\x20\x30\x20\x52\x3e\x3e\x0d\x0a\x73\x74\x61\x72\x74\x78\x72\x65\x66\x0d\x0a\x34\x30\x36\x0d\x0a\x25\x25\x45\x4f\x46';
-        var a = document.createElement('a');
-        var b64PdfFile = btoa(decodeURIComponent(encodeURIComponent(fileContent)));
-        a.href = "data:application/octet-stream;base64," + b64PdfFile;
-        a.setAttribute('download', filename);
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        // console.log(b64PdfFile);
-        // console.log('Export to PDF');
+
+        const rawLength = fileContent.length;
+        const uInt8Array = new Uint8Array(rawLength);
+        
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = fileContent.charCodeAt(i);
+        }
+        
+
+        var blob = new Blob([uInt8Array], { type: 'application/octet-stream'});;
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, filename);
+        }
+        else {
+            var elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = filename;
+            document.body.appendChild(elem);
+            elem.click();
+            document.body.removeChild(elem);
+        }
+        
     }
 
 }

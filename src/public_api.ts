@@ -22,14 +22,6 @@ export * from './lib/ftable.component';
 export * from './lib/ftable.model';
 export * from './lib/ftable.module';
 
-
 export * from './lib/service/ftablebase.service';
 export * from './lib/service/ftablelocal.service';
 export * from './lib/service/ftableAPI.service';
-
-
-// export * from './lib/ffilter/model/ffilter.model';
-// export * from './lib/ffilter/ffilter.service';
-
-
-

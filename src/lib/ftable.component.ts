@@ -14,14 +14,9 @@ export class FTableComponent implements OnChanges, OnInit {
 
     public table: FTable;
     public page = [];
-    // Classes that control the icons for sorting
-    public sortIcons = [];
 
-//     // Column Titles
-//     private errorMessage: string;
 
     constructor(public _ftableService: FTableBaseService) {
-                  this.sortIcons = ['fa fa-sort', 'fa fa-sort-asc', 'fa fa-sort-desc'];
     }
 
     ngOnInit() {
@@ -29,8 +24,6 @@ export class FTableComponent implements OnChanges, OnInit {
     }
 
     ngOnChanges(changes) {
-        // When the data is async : get the changes when they are ready
-        // Get @Input data when it's ready
         if (changes.url) {
             this.refreshPage();
         }
@@ -46,14 +39,6 @@ export class FTableComponent implements OnChanges, OnInit {
         this.table.dataModifier.currentPage = pageNumber;
         this.refreshPage();
     }
-
-    // sortOrder(index, event) {
-    //     this.table.dataModifier.orders =  this.table.dataModifier.orders.filter(x => x.columnIndex !== index);
-    //     if (event.state !== '') {
-    //         this.table.dataModifier.orders.push(new FOrder(index, event.state));
-    //     }
-    //     this.refreshPage();
-    // }
 
     sortOrder(columnName:string, event) {
         this.table.dataModifier.orders =  this.table.dataModifier.orders.filter(x => x.columnName !== columnName);
@@ -83,9 +68,6 @@ export class FTableComponent implements OnChanges, OnInit {
         this.refreshPage();
     }
 
-
-
-
     refreshPage(){
          this._ftableService.getData(this.table)
         .subscribe(
@@ -97,7 +79,6 @@ export class FTableComponent implements OnChanges, OnInit {
           
     }
 
-
     changeValue(idValue:any,propertyToChange: string,fn: any){
         this._ftableService.setData(idValue,propertyToChange,fn)
         .subscribe(
@@ -108,9 +89,9 @@ export class FTableComponent implements OnChanges, OnInit {
             });
        
     }
-
     
     public resetFilters() {
         this.filterChildren.forEach(x => x.reset());
     }
+
 }
