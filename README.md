@@ -35,12 +35,16 @@ Provide backend to frontend preconfiguration
 Provide some other sample backend systems node/php  
 thenby will be replaced to introduce ordering by type
 
-### Proof of Concept Application and Backend system
+### Proof of Concept Application and Backend system   
+
+View Online   
+http://code.fairmutex.com/projects/web/FTablesSample/local   
 
 Sample application Usage with Local Data and Web API always upated with the latest ( Sample API below )  
 https://github.com/fairmutex/FTable-sample
 
 Sample  Backend Web API .net Framework  
+		Backend API core 2.2  
 https://github.com/fairmutex/FTable-WebAPI-sample  
 
 ### Updates

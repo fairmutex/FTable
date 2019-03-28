@@ -29,7 +29,7 @@ export class FTableAPIService implements FTableBaseService{
     } 
     
     get(id:any){
-        return this.httpClient.get(this.APIURL+'/'+id,{headers: this.httpHeaders});
+        return this.httpClient.get(this.APIURL+id,{headers: this.httpHeaders});
     }
 
     // getByColumnNameAndValue(name: string,value:any): Observable<any>{

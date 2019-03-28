@@ -12,7 +12,6 @@ import { EventEmitter } from '@angular/core';
 })
 
 export class FSorterComponent {
-    @Input() public icons: string[];
     @Output() order: EventEmitter<any> = new EventEmitter<any>();
 
     public states: string[];
