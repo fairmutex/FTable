@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
 import { FPagerComponent } from './fpager.component';
 import { FPaginateComponent } from './fpaginate.component';
@@ -27,8 +26,7 @@ import { DateFFilterComponent } from './ffilter/filters/dateffilter.component';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    ReactiveFormsModule
   ],
   declarations: [
     FPaginateComponent,
