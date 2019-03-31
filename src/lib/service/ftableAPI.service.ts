@@ -46,7 +46,7 @@ export class FTableAPIService implements FTableBaseService{
             headers: this.httpHeaders
        }; 
 
-       return this.httpClient.put(this.APIURL+id+'/'+propertyToChange,'"'+value+'"',options);
+       return this.httpClient.put(this.APIURL+id+'/'+propertyToChange,JSON.stringify(value),options);
     }
 
     delete(id:any):Observable<any>{

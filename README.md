@@ -25,7 +25,8 @@ A set of components that work together to create tabular content.
 ### Dependencies
 - thenBy library
 
- 
+### Issues:   
+On initialization with FOrder this is not reflected in the UI
 
 ### TODO:  
 Friendly API  
