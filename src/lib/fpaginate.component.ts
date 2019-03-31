@@ -19,13 +19,18 @@ export class FPaginateComponent implements OnInit, OnChanges {
     // Data
     @Input() private totalItems: number;
     // Current Page
-    @Input() public currentPage: number;
+    public _currentPage: number;
 
     @Input()
     set totalItemsAfterFilters(totalItemsAfterFilters: number) {
         this._totalItemsAfterFilters = totalItemsAfterFilters;
         this.totalPages = Math.ceil(this._totalItemsAfterFilters / this.itemsPerPage);
-        this.currentPage = 1;
+        this._currentPage = 1;
+    }
+
+    @Input()
+    set currentPage(num: number) {
+      this._currentPage = num;
     }
 
 
@@ -36,7 +41,7 @@ export class FPaginateComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.totalPages = Math.ceil(this._totalItemsAfterFilters / this.itemsPerPage);
-        this.setCurrentPage(this.currentPage);
+        this.setCurrentPage(this._currentPage);
     }
 
     ngOnChanges() {
@@ -53,11 +58,11 @@ export class FPaginateComponent implements OnInit, OnChanges {
     }
 
     previousPage() {
-        this.setCurrentPage(this.currentPage - 1);
+        this.setCurrentPage(this._currentPage - 1);
     }
 
     nextPage() {
-        this.setCurrentPage(this.currentPage + 1);
+        this.setCurrentPage(this._currentPage + 1);
     }
 
     lastPage() {
@@ -65,19 +70,19 @@ export class FPaginateComponent implements OnInit, OnChanges {
     }
 
     isFirstDisabled() {
-        return (this.currentPage === 1);
+        return (this._currentPage === 1);
     }
 
     isPreviousDisabled() {
-        return (this.currentPage === 1);
+        return (this._currentPage === 1);
     }
 
     isNextDisabled() {
-        return (this.currentPage === this.totalPages);
+        return (this._currentPage === this.totalPages);
     }
 
     isLastDisabled() {
-        return (this.currentPage === this.totalPages);
+        return (this._currentPage === this.totalPages);
     }
 
 }
