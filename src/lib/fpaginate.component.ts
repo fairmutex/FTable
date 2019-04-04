@@ -19,7 +19,7 @@ export class FPaginateComponent implements OnInit, OnChanges {
     // Data
     @Input() private totalItems: number;
     // Current Page
-    public _currentPage: number;
+     public _currentPage: number;
 
     @Input()
     set totalItemsAfterFilters(totalItemsAfterFilters: number) {
@@ -33,8 +33,15 @@ export class FPaginateComponent implements OnInit, OnChanges {
       this._currentPage = num;
     }
 
-
     @Output() PagingChange: EventEmitter<number> = new EventEmitter<number>();
+
+
+
+    // get currentPage(): number {
+    //     return this.currentPage;
+    //   }
+      
+ 
 
     private _totalItemsAfterFilters: number;
     public totalPages: number;
@@ -49,7 +56,7 @@ export class FPaginateComponent implements OnInit, OnChanges {
     }
 
     setCurrentPage(number: number) {
-        this.currentPage = number;
+        this._currentPage = number;
         this.PagingChange.emit(number);
     }
 
