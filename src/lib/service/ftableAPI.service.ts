@@ -62,7 +62,7 @@ export class FTableAPIService implements FTableBaseService{
             let options = {
                 headers: this.httpHeaders
            }; 
-            return this.httpClient.post<FTableResult>(this.APIURL+'FTables',table.dataModifier,options);
+            return this.httpClient.post<FTableResult>(this.APIURL,table.dataModifier,options);
             
 
         }
