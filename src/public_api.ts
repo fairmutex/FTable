@@ -25,3 +25,4 @@ export * from './lib/ftable.module';
 export * from './lib/service/ftablebase.service';
 export * from './lib/service/ftablelocal.service';
 export * from './lib/service/ftableAPI.service';
+export * from './lib/ftableURL.model';

@@ -7,6 +7,7 @@ import {firstBy} from 'thenby';
 import {  FTable, FColumn, FSearch, FOrder , FTableResult, FTableDataModifier } from '../ftable.model';
 import { FTableBaseService } from './ftablebase.service';
 import {Observable } from 'rxjs';
+import { FTableURLS } from '../ftableURL.model';
 // @Injectable({
 //   providedIn: 'root'
 // })
@@ -19,17 +20,18 @@ export class FTableAPIService implements FTableBaseService{
     }
 
      private httpHeaders: HttpHeaders
-     private APIURL: string
+    //  private APIURL: string
+private APIURLS:FTableURLS;
 
-
-    setAPIConfig(APIURL: string, httpHeaders: HttpHeaders) {
+    setAPIConfig(APIURLS:FTableURLS, httpHeaders: HttpHeaders) {
         this.httpHeaders = httpHeaders;
-        this.APIURL = APIURL;
+        this.APIURLS = APIURLS;
+        // this.APIURL = APIURL;
       //  this.http.post(APIURL,'',{headers: headers});
     } 
     
     get(id:any){
-        return this.httpClient.get(this.APIURL+id,{headers: this.httpHeaders});
+        return this.httpClient.get(this.APIURLS.GET+id,{headers: this.httpHeaders});
     }
 
     // getByColumnNameAndValue(name: string,value:any): Observable<any>{
@@ -41,12 +43,12 @@ export class FTableAPIService implements FTableBaseService{
     *
     */
     setData(id:any,propertyToChange:string,value: any):Observable<any>{
-        console.log(this.APIURL+id+'/'+propertyToChange);
+        // console.log(this.APIURLS.PUT+id+'/'+propertyToChange);
         let options = {
             headers: this.httpHeaders
        }; 
 
-       return this.httpClient.put(this.APIURL+id+'/'+propertyToChange,JSON.stringify(value),options);
+       return this.httpClient.put(this.APIURLS.PUT+id+'/'+propertyToChange,JSON.stringify(value),options);
     }
 
     delete(id:any):Observable<any>{
@@ -54,7 +56,7 @@ export class FTableAPIService implements FTableBaseService{
             headers: this.httpHeaders
        }; 
 
-       return this.httpClient.delete(this.APIURL+id,options);
+       return this.httpClient.delete(this.APIURLS.DELETE+id,options);
     }
 
         getData(table: FTable): Observable<FTableResult> {
@@ -62,7 +64,7 @@ export class FTableAPIService implements FTableBaseService{
             let options = {
                 headers: this.httpHeaders
            }; 
-            return this.httpClient.post<FTableResult>(this.APIURL,table.dataModifier,options);
+            return this.httpClient.post<FTableResult>(this.APIURLS.FTTABLE,table.dataModifier,options);
             
 
         }
